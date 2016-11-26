@@ -1,0 +1,1354 @@
+swagger: '2.0'
+info:
+  title: Spark API
+  version: "1.2.0"
+  description: Cisco Spark API version 1 Swagger Definition File.
+externalDocs:
+  url: https://developer.ciscospark.com
+host: api.ciscospark.com
+schemes:
+  - https
+basePath: /v1
+produces:
+  - application/json
+consumes:
+  - application/json
+securityDefinitions:
+  Authorization:
+    type: apiKey
+    name: Authorization
+    in: header
+security:
+  - Authorization: []
+tags:
+  - name: people
+    description: Query, Create, Update, and Delete Spark Users.
+  - name: rooms
+    description: Query, Create, Update, and Delete Spark Rooms.
+  - name: memberships
+    description: Query, Create, Update, and Delete Spark Room Memberships.
+  - name: messages
+    description: Query, Create, and Delete Spark Messages.
+  - name: teams
+    description: Query, Create, Update, and Delete Spark Teams.
+  - name: teamMemberships
+    description: Query, Create, Update, and Delete Spark Team Memberships.
+  - name: webhooks
+    description: Query, Create, Update, and Delete Spark Webhooks.
+  - name: organizations
+    description: Query Organizations
+  - name: licenses
+    description: Query Licenses
+  - name: roles
+    description: Query Roles
+  - name: contents
+    description: Retrieve Files
+paths:
+  /people/:
+    get:
+      operationId: getPeople
+      summary: Returns array of Person objects.
+      description: Search people by email address or dispaly name.
+      tags:
+        - people
+      parameters:
+        - name: email
+          in: query
+          description: Email address
+          required: false
+          type: string
+          format: email
+        - name: displayName
+          in: query
+          description: List people whose name starts with this string
+          required: false
+          type: string
+        - $ref: '#/parameters/Max'
+      responses:
+        200:
+          $ref: '#/responses/People'
+    post:
+      operationId: addPerson
+      summary: Create a Person. Returns Person Object.
+      description: Create a new user account for a given organization. Only an admin can create a new user account.
+      tags:
+        - people
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - emails
+              - displayName
+            properties:
+              emails:
+                  description: Array of emails of Person
+                  type: array
+                  items:
+                    type: string
+                    format: email
+              displayName:
+                description: Person display name
+                type: string
+              firstName:
+                description: Person first name
+                type: string
+              lastName:
+                description: Person last name
+                type: string
+              avatar:
+                description: URL of Person avatar
+                type: string
+                format: url
+              orgId:
+                description: Organization ID of Person
+                type: string
+              roles:
+                description: Array of Role IDs of Person
+                type: array
+                items:
+                  type: string
+              licenses:
+                description: Array of License IDs of Person
+                type: array
+                items:
+                  type: string
+      responses:
+        200:
+          $ref: '#/responses/Person'
+  /people/{personId}:
+    get:
+      operationId: getPerson
+      summary: Return Person Object by ID query.
+      description: Shows details for a person by ID. Specify the person ID in the personId parameter in the URI.
+      tags:
+        - people
+      parameters:
+        - name: personId
+          in: path
+          description: Person ID
+          required: true
+          type: string
+      responses:
+        200:
+          $ref: '#/responses/Person'
+    put:
+      operationId: updatePerson
+      summary: Update a Person. Returns Person Object.
+      description: Update details for a person, by ID. Specify the person ID in the personId parameter in the URI. Only an admin can update person details.
+      tags:
+        - people
+      parameters:
+        - name: personId
+          in: path
+          description: Person ID
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - emails
+              - displayName
+              - orgId
+              - roles
+              - licenses
+            properties:
+              emails:
+                description: Array of emails of Person
+                type: array
+                items:
+                  type: string
+                  format: email
+              displayName:
+                description: Person display name
+                type: string
+              firstName:
+                description: Person first name
+                type: string
+              lastName:
+                description: Person last name
+                type: string
+              avatar:
+                description: URL of Person avatar
+                type: string
+                format: url
+              orgId:
+                description: Organization ID of Person
+                type: string
+              roles:
+                description: Array of Role IDs of Person
+                type: array
+                items:
+                  type: string
+              licenses:
+                description: Array of License IDs of Person
+                type: array
+                items:
+                  type: string
+      responses:
+        200:
+          $ref: '#/responses/Person'
+    delete:
+      operationId: deletePerson
+      summary: Delete a Person. Returns null.
+      description: Remove a person from the system. Only an admin can remove a person. Specify the person ID in the personId parameter in the URI.
+      tags:
+        - people
+      parameters:
+        - name: personId
+          in: path
+          description: Person ID
+          required: true
+          type: string
+      responses:
+        204:
+          description: Successful response
+  /people/me:
+    get:
+      operationId: getMe
+      summary: Returns Person object of authenticated user.
+      description: Show the details of the Person Object of the authenticated user.
+      tags:
+        - people
+      responses:
+        200:
+          $ref: '#/responses/Person'
+  /rooms/:
+    get:
+      operationId: getRooms
+      summary: Returns array of Room Objects.
+      description: List rooms. By default, lists rooms to which the authenticated user belongs.
+      tags:
+        - rooms
+      parameters:
+        - name: teamId
+          in: query
+          description: List rooms with this Team ID
+          required: false
+          type: string
+        - name: type
+          in: query
+          description: List rooms of this type
+          required: false
+          type: string
+          pattern: '(group|direct)'
+        - $ref: '#/parameters/Max'
+      responses:
+        200:
+          $ref: '#/responses/Rooms'
+    post:
+      operationId: createRoom
+      summary: Create a Room. Returns Room Object.
+      description: Creates a room. The authenticated user is automatically added as a member of the room. See the Memberships API to learn how to add more people to the room.
+      tags:
+        - rooms
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - title
+            properties:
+              title:
+                description: Specify title for new Room
+                type: string
+              teamId:
+                description: Specify Team ID for new Room
+                type: string
+      responses:
+        200:
+          $ref: '#/responses/Room'
+  /rooms/{roomId}:
+    get:
+      operationId: getRoom
+      summary: Returns Room Object by ID Query.
+      description: Shows details for a room, by ID. Specify the room ID in the roomId parameter in the URI.
+      tags:
+        - rooms
+      parameters:
+        - name: roomId
+          in: path
+          description: Room ID
+          required: true
+          type: string
+      responses:
+        200:
+          $ref: '#/responses/Room'
+    put:
+      operationId: updateRoom
+      summary: Update a Room. Returns Room Object.
+      description: Updates details for a room, by ID. Specify the room ID in the roomId parameter in the URI.
+      tags:
+        - rooms
+      parameters:
+        - name: roomId
+          in: path
+          description: Room ID
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - title
+            properties:
+              title:
+                description: Specify new Room title
+                type: string
+      responses:
+        200:
+          $ref: '#/responses/Room'
+    delete:
+      operationId: deleteRoom
+      summary: Delete a Room. Returns null.
+      description: Deletes a room, by ID. Specify the room ID in the roomId parameter in the URI.
+      tags:
+        - rooms
+      parameters:
+        - name: roomId
+          in: path
+          description: Room ID
+          required: true
+          type: string
+      responses:
+        204:
+          description: Successful response
+  /memberships/:
+    get:
+      operationId: getMemberships
+      summary: Returns array of Membership Objects.
+      description: Lists all room memberships. By default, lists memberships for rooms to which the authenticated user belongs. Use query parameters to filter the response. Use roomId to list memberships for a room, by ID. Use either personId or personEmail to filter the results.
+      tags:
+        - memberships
+      parameters:
+        - name: roomId
+          in: query
+          description: List Memberships with this Room ID
+          required: false
+          type: string
+        - name: personId
+          in: query
+          description: List Memberships for this Person ID
+          required: false
+          type: string
+        - name: personEmail
+          in: query
+          description: List Memberships for this Person Email
+          required: false
+          type: string
+          format: email
+        - $ref: '#/parameters/Max'
+      responses:
+        200:
+          $ref: '#/responses/Memberships'
+    post:
+      operationId: createMembership
+      summary: Create a Membership. Returns Membership Object.
+      description: Add someone to a room by Person ID or email address; optionally making them a moderator.
+      tags:
+        - memberships
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - roomId
+            properties:
+              roomId:
+                description: Room ID for Membership
+                type: string
+              personId:
+                description: Person ID for Membership
+                type: string
+              personEmail:
+                description: Person Email for Membership
+                type: string
+                format: email
+              isModerator:
+                description: Specify if Membership is a moderator
+                type: boolean
+      responses:
+        200:
+          $ref: '#/responses/Membership'
+  /memberships/{membershipId}:
+    get:
+      operationId: getMembership
+      summary: Returns Membership Object by ID query.
+      description: Get details for a membership by ID. Specify the membership ID in the membershipId URI parameter.
+      tags:
+        - memberships
+      parameters:
+        - name: membershipId
+          in: path
+          description: Membership ID
+          required: true
+          type: string
+      responses:
+        200:
+          $ref: '#/responses/Membership'
+    put:
+      operationId: updateMembership
+      summary: Update a Membership. Returns Membership Object.
+      description: Updates properties for a membership by ID. Specify the membership ID in the membershipId URI parameter.
+      tags:
+        - memberships
+      parameters:
+        - name: membershipId
+          in: path
+          description: Membership ID
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - isModerator
+            properties:
+              isModerator:
+                description: Update membership moderator status
+                type: string
+      responses:
+        200:
+          $ref: '#/responses/Membership'
+    delete:
+      operationId: deleteMembership
+      summary: Delete a Membership. Returns null.
+      description: Deletes a membership by ID. Specify the membership ID in the membershipId URI parameter.
+      tags:
+        - memberships
+      parameters:
+        - name: membershipId
+          in: path
+          description: Membership ID
+          required: true
+          type: string
+      responses:
+        204:
+          description: Successful response
+  /messages/:
+    get:
+      operationId: getMessages
+      summary: Returns array of Message Objects.
+      description: Lists all messages in a room with roomType. If present, includes the associated media content attachment for each message. The roomType could be a group or direct (1:1). The list sorts the messages in descending order by creation date.
+      tags:
+        - messages
+      parameters:
+        - name: roomId
+          in: query
+          description: List Messages in this Room ID
+          required: true
+          type: string
+        - name: mentionedPeople
+          in: query
+          description: List Messages for this Person ID
+          required: false
+          type: string
+        - name: before
+          in: query
+          description: List Messages before this date/time stamp
+          required: false
+          type: string
+          format: date-time
+        - name: beforeMessage
+          in: query
+          description: List Messages before this Message ID
+          required: false
+          type: string
+        - $ref: '#/parameters/Max'
+      responses:
+        200:
+          $ref: '#/responses/Messages'
+    post:
+      operationId: createMessage
+      summary: Create a Message. Returns Message Object.
+      description: Posts a plain text or markdown formatted message, and optionally, a media content attachment, to a room.
+      tags:
+        - messages
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              roomId:
+                description: Room ID for Message
+                type: string
+              toPersonId:
+                description: Person ID for Message
+                type: string
+              toPersonEmail:
+                description: Person Email for Message
+                type: string
+                format: email
+              text:
+                description: Message as plain text
+                type: string
+              markdown:
+                description: Message as markdown
+                type: string
+              html:
+                description: Message as html
+                type: string
+              files:
+                description: Internet accessable File URL
+                type: string
+                format: url
+      responses:
+        200:
+          $ref: '#/responses/Message'
+  /messages/{messageId}:
+    get:
+      operationId: getMessage
+      summary:  Returns Message Object by ID query.
+      description: Shows details for a message, by message ID. Specify the message ID in the messageId parameter in the URI.
+      tags:
+        - messages
+      parameters:
+        - name: messageId
+          in: path
+          description: Message ID
+          required: true
+          type: string
+      responses:
+        200:
+          $ref: '#/responses/Message'
+    delete:
+      operationId: deleteMessage
+      summary: Delete a Message. Returns null.
+      description: Deletes a message, by message ID. Specify the message ID in the messageId parameter in the URI.
+      tags:
+        - messages
+      parameters:
+        - name: messageId
+          in: path
+          description: Message ID
+          required: true
+          type: string
+      responses:
+        204:
+          description: Successful response
+  /teams/:
+    get:
+      operationId: getTeams
+      summary: Returns array of Team Objects.
+      description: Lists teams to which the authenticated user belongs.
+      tags:
+        - teams
+      parameters:
+        - $ref: '#/parameters/Max'
+      responses:
+        200:
+          $ref: '#/responses/Teams'
+    post:
+      operationId: createTeam
+      summary: Create a Team. Returns Team Object.
+      description: Creates a team. The authenticated user is automatically added as a member of the team. See the Team Memberships API to learn how to add more people to the team.
+      tags:
+        - teams
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                description: Name of Team
+                type: string
+      responses:
+        200:
+          $ref: '#/responses/Team'
+  /teams/{teamId}:
+    get:
+      operationId: getTeam
+      summary: Returns Team Object by ID query.
+      description: Shows details for a team, by ID. Specify the room ID in the teamId parameter in the URI.
+      tags:
+        - teams
+      parameters:
+        - name: teamId
+          in: path
+          description: Team ID
+          required: true
+          type: string
+      responses:
+        200:
+          $ref: '#/responses/Team'
+    put:
+      operationId: updateTeam
+      summary: Update a Team. Returns Team Object.
+      description: Updates details for a team, by ID. Specify the team ID in the teamId parameter in the URI.
+      tags:
+        - teams
+      parameters:
+        - name: teamId
+          in: path
+          description: Team ID
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                description: Specify new Team name
+                type: string
+      responses:
+        200:
+          $ref: '#/responses/Team'
+    delete:
+      operationId: deleteTeam
+      summary: Delete a Team. Returns null.
+      description: Deletes a team, by ID. Specify the team ID in the teamId parameter in the URI.
+      tags:
+        - teams
+      parameters:
+        - name: teamId
+          in: path
+          description: Team ID
+          required: true
+          type: string
+      responses:
+        204:
+          description: Successful response
+  /team/memberships/:
+    get:
+      operationId: getTeamMemberships
+      summary: Returns array of TeamMembership Objects.
+      description: Lists all team memberships. By default, lists memberships for teams to which the authenticated user belongs. Use query parameters to filter the response. Use teamId to list memberships for a team, by ID.
+      tags:
+        - teamMemberships
+      parameters:
+        - name: teamId
+          in: query
+          description: List memberships for this Team ID
+          required: true
+          type: string
+        - $ref: '#/parameters/Max'
+      responses:
+        200:
+          $ref: '#/responses/TeamMemberships'
+    post:
+      operationId: createTeamMembership
+      summary: Create a Team Membership. Returns TeamMembership Object.
+      description: Add someone to a team by Person ID or email address; optionally making them a moderator.
+      tags:
+        - teamMemberships
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - teamId
+            properties:
+              teamId:
+                description: Team ID for Team Membership
+                type: string
+              personId:
+                description: Person ID for Team Membership
+                type: string
+              personEmail:
+                description: Person Email for Team Membership
+                type: string
+                format: email
+              isModerator:
+                description: Specify if Team Membership is a moderator
+                type: boolean
+      responses:
+        200:
+          $ref: '#/responses/TeamMembership'
+  /team/memberships/{membershipId}:
+    get:
+      operationId: getTeamMembership
+      summary: Returns TeamMembership Object by ID query.
+      description: Get details for a membership by ID. Specify the membership ID in the membershipId URI parameter.
+      tags:
+        - teamMemberships
+      parameters:
+        - name: membershipId
+          in: path
+          description: Membership ID
+          required: true
+          type: string
+      responses:
+        200:
+          $ref: '#/responses/TeamMembership'
+    put:
+      operationId: updateTeamMembership
+      summary: Update a Team Membership. Returns TeamMembership Object.
+      description: Updates properties for a membership by ID. Specify the membership ID in the membershipId URI parameter.
+      tags:
+        - teamMemberships
+      parameters:
+        - name: membershipId
+          in: path
+          description: Membership ID
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - isModerator
+            properties:
+              isModerator:
+                description: Update team membership moderator status
+                type: string
+      responses:
+        200:
+          $ref: '#/responses/TeamMembership'
+    delete:
+      operationId: deleteTeamMembership
+      summary: Delete a Team Membership. Returns null.
+      description: Deletes a membership by ID. Specify the membership ID in the membershipId URI parameter.
+      tags:
+        - teamMemberships
+      parameters:
+        - name: membershipId
+          in: path
+          description: Membership ID
+          required: true
+          type: string
+      responses:
+        204:
+          description: Successful response
+  /webhooks/:
+    get:
+      operationId: getWebhooks
+      summary: Returns array of Webhook Objects.
+      description: Lists all of your webhooks.
+      tags:
+        - webhooks
+      parameters:
+        - $ref: '#/parameters/Max'
+      responses:
+        200:
+          $ref: '#/responses/Webhooks'
+    post:
+      operationId: createWebhook
+      summary: Create a Webhook. Returns Webhook Object.
+      description: Creates a webhook.
+      tags:
+        - webhooks
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - name
+              - targetUrl
+              - resource
+              - event
+            properties:
+              name:
+                description: Webhook name
+                type: string
+              targetUrl:
+                description: Webhook URL
+                type: string
+                format: url
+              resource:
+                description: Webhook resource
+                type: string
+              event:
+                description: Webhook event
+                type: string
+              filter:
+                description: Webhook filter
+                type: string
+              secret:
+                description: Webhook Secret
+                type: string
+      responses:
+        200:
+          $ref: '#/responses/Webhook'
+  /webhooks/{webhookId}:
+    get:
+      operationId: getWebhook
+      summary: Returns Webhook Object by ID query.
+      description: Shows details for a webhook, by ID. Specify the webhook ID in the webhookId parameter in the URI.
+      tags:
+        - webhooks
+      parameters:
+        - name: webhookId
+          in: path
+          description: Webhook ID
+          required: true
+          type: string
+      responses:
+        200:
+          $ref: '#/responses/Webhook'
+    put:
+      operationId: updateWebhook
+      summary: Update a Webhook. Returns Webhook Object.
+      description: Updates a webhook, by ID. Specify the webhook ID in the webhookId parameter in the URI.
+      tags:
+        - webhooks
+      parameters:
+        - name: webhookId
+          in: path
+          description: Webhook ID
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            required:
+              - name
+              - targetUrl
+            properties:
+              name:
+                description: Update Webhook name
+                type: string
+              targetUrl:
+                description: Update Webhook URL
+                type: string
+                format: url
+      responses:
+        200:
+          $ref: '#/responses/Webhook'
+    delete:
+      operationId: deleteWebhook
+      summary: Delete a Webhook. Returns null.
+      description: Deletes a webhook, by ID. Specify the webhook ID in the webhookId parameter in the URI.
+      tags:
+        - webhooks
+      parameters:
+        - name: webhookId
+          in: path
+          description: Webhook ID
+          required: true
+          type: string
+      responses:
+        204:
+          description: Successful response
+  /organizations/:
+    get:
+      operationId: getOrganizations
+      summary: Returns array of Organization Objects.
+      description: Lists all of your visible Organizations.
+      tags:
+        - organizations
+      parameters:
+        - $ref: '#/parameters/Max'
+      responses:
+        200:
+          $ref: '#/responses/Organizations'
+  /organizations/{orgId}:
+    get:
+      operationId: getOrganization
+      summary: Returns Organization Object by ID Query.
+      description: Shows details for a organization, by ID. Specify the organization ID in the orgId parameter in the URI.
+      tags:
+        - organizations
+      parameters:
+        - name: orgId
+          in: path
+          description: Organization ID
+          required: true
+          type: string
+      responses:
+        200:
+          $ref: '#/responses/Organization'
+  /licenses/:
+    get:
+      operationId: getLicenses
+      summary: Returns array of License Objects.
+      description: Lists all of your visible Licenses.
+      tags:
+        - licenses
+      parameters:
+        - $ref: '#/parameters/Max'
+      responses:
+        200:
+          $ref: '#/responses/Licenses'
+  /licenses/{licenseId}:
+    get:
+      operationId: getLicense
+      summary: Returns License Object by ID Query.
+      description: Shows details for a license, by ID. Specify the license ID in the licenseId parameter in the URI.
+      tags:
+        - licenses
+      parameters:
+        - name: licenseId
+          in: path
+          description: License ID
+          required: true
+          type: string
+      responses:
+        200:
+          $ref: '#/responses/License'
+  /roles/:
+    get:
+      operationId: getRoles
+      summary: Returns array of Role Objects.
+      description: Lists all of your visible Roles.
+      tags:
+        - roles
+      parameters:
+        - $ref: '#/parameters/Max'
+      responses:
+        200:
+          $ref: '#/responses/Roles'
+  /roles/{roleId}:
+    get:
+      operationId: getRole
+      summary: Returns Role Object by ID Query.
+      description: Shows details for a role, by ID. Specify the role ID in the roleId parameter in the URI.
+      tags:
+        - roles
+      parameters:
+        - name: roleId
+          in: path
+          description: Role ID
+          required: true
+          type: string
+      responses:
+        200:
+          $ref: '#/responses/Role'
+  /contents/{contentId}:
+    get:
+      operationId: getContent
+      summary: Returns File binary by ID.
+      description: Retrieve the contents of a file by content ID.
+      tags:
+        - contents
+      parameters:
+        - name: contentId
+          in: path
+          description: Content ID
+          required: true
+          type: string
+      responses:
+        200:
+          $ref: '#/responses/Contents'
+definitions:
+  Person:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Person ID
+      emails:
+        type: array
+        items:
+          type: string
+          format: email
+          description: Email
+      displayName:
+        type: string
+        description: Person display name
+      avatar:
+        type: string
+        format: url
+        description: URL of Person avatar
+      created:
+        type: string
+        format: dateTime
+        description: Date/Time Person object was created
+      timeZone:
+        type: string
+        description: Time Zone that user is located
+  Room:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Room ID
+      title:
+        type: string
+        description: Room Title
+      type:
+        type: string
+        description: Room Type
+      isLocked:
+        type: boolean
+        description: Room moderation status
+      teamId:
+        type: string
+        description: Room Team ID
+      creatorId:
+        type: string
+        description: Room creator ID
+      lastActivity:
+        type: string
+        format: dateTime
+        description: Date/Time of Room's last activity
+      created:
+        type: string
+        format: dateTime
+        description: Date/Time Room was created
+  Membership:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Membership ID
+      roomId:
+        type: string
+        description: Membership Room ID
+      personId:
+        type: string
+        description: Membership Person ID
+      personEmail:
+        type: string
+        format: email
+        description: Membership Person Email
+      personDisplayName:
+        type: string
+        description: Person display name
+      isModerator:
+        type: boolean
+        description: Membership moderator status
+      isMonitor:
+        type: boolean
+        description: Membership monitor status
+      created:
+        type: string
+        format: dateTime
+        description: Date/Time Membership was created
+  Message:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Message ID
+      roomId:
+        type: string
+        description: Message in Room ID
+      roomType:
+        type: string
+        description: Message in Room Type
+      toPersonId:
+        type: string
+        description: Message to person ID
+      toPersonEmail:
+        type: string
+        format: email
+        description: Message to person Email
+      text:
+        type: string
+        description: Message in plain test format
+      markdown:
+        type: string
+        description: Message in markdown format
+      html:
+        type: string
+        description: Message in html format
+      files:
+        type: array
+        items:
+          type: string
+          format: url
+          description: File URL
+      personId:
+        type: string
+        description: Message by Person ID
+      personEmail:
+        type: string
+        format: email
+        description: Message by Person Email
+      created:
+        type: string
+        format: dateTime
+        description: Date/Time Message was created
+      mentionedPeople:
+        type: array
+        description: Person IDs mentioned in Message
+        items:
+          type: string
+          description: Person ID
+  Team:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Team ID
+      name:
+        type: string
+        description: Team Name
+      creatorId:
+        type: string
+        description: Team creator ID
+      created:
+        type: string
+        format: dateTime
+        description: Date/Time Team was created
+  TeamMembership:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Team Membership ID
+      teamId:
+        type: string
+        description: Team ID
+      personId:
+        type: string
+        description: Team Membership Person ID
+      personEmail:
+        type: string
+        format: email
+        description: Team Membership Person Email
+      personDisplayName:
+        type: string
+        description: Person display name
+      isModerator:
+        type: boolean
+        description: Team Membership moderator status
+      created:
+        type: string
+        format: dateTime
+        description: Date/Time Team Membership was created
+  Webhook:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Webhook ID
+      name:
+        type: string
+        description: Webhook name
+      targetUrl:
+        type: string
+        format: url
+        description: Webhook URL target
+      resource:
+        type: string
+        description: Webhook resource
+        pattern: '(all|messages|memberships|rooms)'
+      event:
+        type: string
+        description: Webhook event trigger
+        pattern: '(all|created|updated|deleted)'
+      orgId:
+        type: string
+        description: Webhook organization ID
+      createdBy:
+        type: string
+        description: Webhook created by ID
+      appId:
+        type: string
+        description: Webhook application ID
+      ownedBy:
+        type: string
+        description: Webhook owner
+      filter:
+        type: string
+        description: Webhook result filter
+      status:
+        type: string
+        description: Webhook status
+      secret:
+        type: string
+        description: Webhook secret
+      created:
+        type: string
+        format: dateTime
+        description: Date/Time Webhook was created
+  Organization:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Organization ID
+      displayName:
+        type: string
+        description: Organization Display Name
+      created:
+        type: string
+        format: dateTime
+        description: Date/Time Organization was created
+  License:
+    type: object
+    properties:
+      id:
+        type: string
+        description: License ID
+      displayName:
+        type: string
+        description: License Display Name
+      totalUnits:
+        type: string
+        description: License quantity total
+      consumedUnits:
+        type: string
+        description: License quantity consumed
+  Role:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Role ID
+      displayName:
+        type: string
+        description: Role Display Name
+responses:
+  Person:
+    description: Successful response
+    schema:
+      $ref: '#/definitions/Person'
+  People:
+    description: Successful response
+    schema:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/definitions/Person'
+  Room:
+    description: Successful response
+    schema:
+      $ref: '#/definitions/Room'
+  Rooms:
+    description: Successful response
+    schema:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/definitions/Room'
+  Membership:
+    description: Successful response
+    schema:
+      $ref: '#/definitions/Membership'
+  Memberships:
+    description: Successful response
+    schema:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/definitions/Membership'
+  Message:
+    description: Successful response
+    schema:
+      $ref: '#/definitions/Message'
+  Messages:
+    description: Successful response
+    schema:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/definitions/Message'
+  Team:
+    description: Successful response
+    schema:
+      $ref: '#/definitions/Team'
+  Teams:
+    description: Successful response
+    schema:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/definitions/Team'
+  TeamMembership:
+    description: Successful response
+    schema:
+      $ref: '#/definitions/TeamMembership'
+  TeamMemberships:
+    description: Successful response
+    schema:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/definitions/TeamMembership'
+  Webhook:
+    description: Successful response
+    schema:
+      $ref: '#/definitions/Webhook'
+  Webhooks:
+    description: Successful response
+    schema:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/definitions/Webhook'
+  Organization:
+    description: Successful response
+    schema:
+      $ref: '#/definitions/Organization'
+  Organizations:
+    description: Successful response
+    schema:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/definitions/Organization'
+  License:
+    description: Successful response
+    schema:
+      $ref: '#/definitions/License'
+  Licenses:
+    description: Successful response
+    schema:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/definitions/License'
+  Role:
+    description: Successful response
+    schema:
+      $ref: '#/definitions/Role'
+  Roles:
+    description: Successful response
+    schema:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/definitions/Role'
+  Contents:
+    description: Successful response
+parameters:
+  Max:
+    name: max
+    in: query
+    description: Limit the maximum number results
+    required: false
+    type: integer
+    pattern: '{[0-9]+:[0-9]+}'
