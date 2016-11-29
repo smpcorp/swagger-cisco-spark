@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   title: Spark API
-  version: "1.2.0"
+  version: "1.2.1"
   description: Cisco Spark API version 1 Swagger Definition File.
 externalDocs:
   url: https://developer.ciscospark.com
@@ -419,7 +419,7 @@ paths:
             properties:
               isModerator:
                 description: Update membership moderator status
-                type: string
+                type: boolean
       responses:
         200:
           $ref: '#/responses/Membership'
@@ -717,7 +717,7 @@ paths:
             properties:
               isModerator:
                 description: Update team membership moderator status
-                type: string
+                type: boolean
       responses:
         200:
           $ref: '#/responses/TeamMembership'
