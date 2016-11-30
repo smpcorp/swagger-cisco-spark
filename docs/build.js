@@ -50,6 +50,7 @@ var processedSpec = getSpec(sparkDef)
             // if httpMethod tag is one of the globally defined tags...
             if(_.includes(spec.paths[urlPath][httpMethod].tags, tag)) {
 
+              // build example for method
               var example = '';
               if(spec.paths[urlPath][httpMethod].parameters) {
                 var body = {};
@@ -116,6 +117,7 @@ var processedSpec = getSpec(sparkDef)
 
               }
 
+              // add method to resources  object
               resources[tag].methods[spec.paths[urlPath][httpMethod].operationId] = {
                 url: sparkApiBase + urlPath,
                 httpMethod: httpMethod,
@@ -128,6 +130,7 @@ var processedSpec = getSpec(sparkDef)
     });
   });
 
+// assemble README markdown from gnerated resources object
 when(processedSpec)
   .then(() => {
     var readme = format('%s\n\n%s\n\n%s\n\n', title, subtitle, intro);
