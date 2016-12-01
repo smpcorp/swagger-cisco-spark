@@ -10,7 +10,7 @@ Query, Create, Update, and Delete Spark Users.
 
 #### people.getPeople(queryObject)
 
-[get] https://api.ciscosparkcom/v1/people/
+[get] https://api.ciscospark.com/v1/people/
 
 Search people by email address or dispaly name.
 
@@ -25,7 +25,7 @@ Search people by email address or dispaly name.
 
 #### people.addPerson(queryObject)
 
-[post] https://api.ciscosparkcom/v1/people/
+[post] https://api.ciscospark.com/v1/people/
 
 Create a new user account for a given organization. Only an admin can create a new user account.
 
@@ -48,7 +48,7 @@ Create a new user account for a given organization. Only an admin can create a n
 
 #### people.getPerson(queryObject)
 
-[get] https://api.ciscosparkcom/v1/people/{personId}
+[get] https://api.ciscospark.com/v1/people/{personId}
 
 Shows details for a person by ID. Specify the person ID in the personId parameter in the URI.
 
@@ -62,7 +62,7 @@ Shows details for a person by ID. Specify the person ID in the personId paramete
 
 #### people.updatePerson(queryObject)
 
-[put] https://api.ciscosparkcom/v1/people/{personId}
+[put] https://api.ciscospark.com/v1/people/{personId}
 
 Update details for a person, by ID. Specify the person ID in the personId parameter in the URI. Only an admin can update person details.
 
@@ -86,7 +86,7 @@ Update details for a person, by ID. Specify the person ID in the personId parame
 
 #### people.deletePerson(queryObject)
 
-[delete] https://api.ciscosparkcom/v1/people/{personId}
+[delete] https://api.ciscospark.com/v1/people/{personId}
 
 Remove a person from the system. Only an admin can remove a person. Specify the person ID in the personId parameter in the URI.
 
@@ -100,7 +100,7 @@ Remove a person from the system. Only an admin can remove a person. Specify the 
 
 #### people.getMe(queryObject)
 
-[get] https://api.ciscosparkcom/v1/people/me
+[get] https://api.ciscospark.com/v1/people/me
 
 Show the details of the Person Object of the authenticated user.
 
@@ -116,7 +116,7 @@ Query, Create, Update, and Delete Spark Rooms.
 
 #### rooms.getRooms(queryObject)
 
-[get] https://api.ciscosparkcom/v1/rooms/
+[get] https://api.ciscospark.com/v1/rooms/
 
 List rooms. By default, lists rooms to which the authenticated user belongs.
 
@@ -131,7 +131,7 @@ List rooms. By default, lists rooms to which the authenticated user belongs.
 
 #### rooms.createRoom(queryObject)
 
-[post] https://api.ciscosparkcom/v1/rooms/
+[post] https://api.ciscospark.com/v1/rooms/
 
 Creates a room. The authenticated user is automatically added as a member of the room. See the Memberships API to learn how to add more people to the room.
 
@@ -148,7 +148,7 @@ Creates a room. The authenticated user is automatically added as a member of the
 
 #### rooms.getRoom(queryObject)
 
-[get] https://api.ciscosparkcom/v1/rooms/{roomId}
+[get] https://api.ciscospark.com/v1/rooms/{roomId}
 
 Shows details for a room, by ID. Specify the room ID in the roomId parameter in the URI.
 
@@ -162,7 +162,7 @@ Shows details for a room, by ID. Specify the room ID in the roomId parameter in 
 
 #### rooms.updateRoom(queryObject)
 
-[put] https://api.ciscosparkcom/v1/rooms/{roomId}
+[put] https://api.ciscospark.com/v1/rooms/{roomId}
 
 Updates details for a room, by ID. Specify the room ID in the roomId parameter in the URI.
 
@@ -179,7 +179,7 @@ Updates details for a room, by ID. Specify the room ID in the roomId parameter i
 
 #### rooms.deleteRoom(queryObject)
 
-[delete] https://api.ciscosparkcom/v1/rooms/{roomId}
+[delete] https://api.ciscospark.com/v1/rooms/{roomId}
 
 Deletes a room, by ID. Specify the room ID in the roomId parameter in the URI.
 
@@ -197,7 +197,7 @@ Query, Create, Update, and Delete Spark Room Memberships.
 
 #### memberships.getMemberships(queryObject)
 
-[get] https://api.ciscosparkcom/v1/memberships/
+[get] https://api.ciscospark.com/v1/memberships/
 
 Lists all room memberships. By default, lists memberships for rooms to which the authenticated user belongs. Use query parameters to filter the response. Use roomId to list memberships for a room, by ID. Use either personId or personEmail to filter the results.
 
@@ -213,7 +213,7 @@ Lists all room memberships. By default, lists memberships for rooms to which the
 
 #### memberships.createMembership(queryObject)
 
-[post] https://api.ciscosparkcom/v1/memberships/
+[post] https://api.ciscospark.com/v1/memberships/
 
 Add someone to a room by Person ID or email address; optionally making them a moderator.
 
@@ -232,7 +232,7 @@ Add someone to a room by Person ID or email address; optionally making them a mo
 
 #### memberships.getMembership(queryObject)
 
-[get] https://api.ciscosparkcom/v1/memberships/{membershipId}
+[get] https://api.ciscospark.com/v1/memberships/{membershipId}
 
 Get details for a membership by ID. Specify the membership ID in the membershipId URI parameter.
 
@@ -246,7 +246,7 @@ Get details for a membership by ID. Specify the membership ID in the membershipI
 
 #### memberships.updateMembership(queryObject)
 
-[put] https://api.ciscosparkcom/v1/memberships/{membershipId}
+[put] https://api.ciscospark.com/v1/memberships/{membershipId}
 
 Updates properties for a membership by ID. Specify the membership ID in the membershipId URI parameter.
 
@@ -263,7 +263,7 @@ Updates properties for a membership by ID. Specify the membership ID in the memb
 
 #### memberships.deleteMembership(queryObject)
 
-[delete] https://api.ciscosparkcom/v1/memberships/{membershipId}
+[delete] https://api.ciscospark.com/v1/memberships/{membershipId}
 
 Deletes a membership by ID. Specify the membership ID in the membershipId URI parameter.
 
@@ -281,7 +281,7 @@ Query, Create, and Delete Spark Messages.
 
 #### messages.getMessages(queryObject)
 
-[get] https://api.ciscosparkcom/v1/messages/
+[get] https://api.ciscospark.com/v1/messages/
 
 Lists all messages in a room with roomType. If present, includes the associated media content attachment for each message. The roomType could be a group or direct (1:1). The list sorts the messages in descending order by creation date.
 
@@ -298,7 +298,7 @@ Lists all messages in a room with roomType. If present, includes the associated 
 
 #### messages.createMessage(queryObject)
 
-[post] https://api.ciscosparkcom/v1/messages/
+[post] https://api.ciscospark.com/v1/messages/
 
 Posts a plain text or markdown formatted message, and optionally, a media content attachment, to a room.
 
@@ -320,7 +320,7 @@ Posts a plain text or markdown formatted message, and optionally, a media conten
 
 #### messages.getMessage(queryObject)
 
-[get] https://api.ciscosparkcom/v1/messages/{messageId}
+[get] https://api.ciscospark.com/v1/messages/{messageId}
 
 Shows details for a message, by message ID. Specify the message ID in the messageId parameter in the URI.
 
@@ -334,7 +334,7 @@ Shows details for a message, by message ID. Specify the message ID in the messag
 
 #### messages.deleteMessage(queryObject)
 
-[delete] https://api.ciscosparkcom/v1/messages/{messageId}
+[delete] https://api.ciscospark.com/v1/messages/{messageId}
 
 Deletes a message, by message ID. Specify the message ID in the messageId parameter in the URI.
 
@@ -352,7 +352,7 @@ Query, Create, Update, and Delete Spark Teams.
 
 #### teams.getTeams(queryObject)
 
-[get] https://api.ciscosparkcom/v1/teams/
+[get] https://api.ciscospark.com/v1/teams/
 
 Lists teams to which the authenticated user belongs.
 
@@ -364,7 +364,7 @@ Lists teams to which the authenticated user belongs.
 
 #### teams.createTeam(queryObject)
 
-[post] https://api.ciscosparkcom/v1/teams/
+[post] https://api.ciscospark.com/v1/teams/
 
 Creates a team. The authenticated user is automatically added as a member of the team. See the Team Memberships API to learn how to add more people to the team.
 
@@ -380,7 +380,7 @@ Creates a team. The authenticated user is automatically added as a member of the
 
 #### teams.getTeam(queryObject)
 
-[get] https://api.ciscosparkcom/v1/teams/{teamId}
+[get] https://api.ciscospark.com/v1/teams/{teamId}
 
 Shows details for a team, by ID. Specify the room ID in the teamId parameter in the URI.
 
@@ -394,7 +394,7 @@ Shows details for a team, by ID. Specify the room ID in the teamId parameter in 
 
 #### teams.updateTeam(queryObject)
 
-[put] https://api.ciscosparkcom/v1/teams/{teamId}
+[put] https://api.ciscospark.com/v1/teams/{teamId}
 
 Updates details for a team, by ID. Specify the team ID in the teamId parameter in the URI.
 
@@ -411,7 +411,7 @@ Updates details for a team, by ID. Specify the team ID in the teamId parameter i
 
 #### teams.deleteTeam(queryObject)
 
-[delete] https://api.ciscosparkcom/v1/teams/{teamId}
+[delete] https://api.ciscospark.com/v1/teams/{teamId}
 
 Deletes a team, by ID. Specify the team ID in the teamId parameter in the URI.
 
@@ -429,7 +429,7 @@ Query, Create, Update, and Delete Spark Team Memberships.
 
 #### teamMemberships.getTeamMemberships(queryObject)
 
-[get] https://api.ciscosparkcom/v1/team/memberships/
+[get] https://api.ciscospark.com/v1/team/memberships/
 
 Lists all team memberships. By default, lists memberships for teams to which the authenticated user belongs. Use query parameters to filter the response. Use teamId to list memberships for a team, by ID.
 
@@ -443,7 +443,7 @@ Lists all team memberships. By default, lists memberships for teams to which the
 
 #### teamMemberships.createTeamMembership(queryObject)
 
-[post] https://api.ciscosparkcom/v1/team/memberships/
+[post] https://api.ciscospark.com/v1/team/memberships/
 
 Add someone to a team by Person ID or email address; optionally making them a moderator.
 
@@ -462,7 +462,7 @@ Add someone to a team by Person ID or email address; optionally making them a mo
 
 #### teamMemberships.getTeamMembership(queryObject)
 
-[get] https://api.ciscosparkcom/v1/team/memberships/{membershipId}
+[get] https://api.ciscospark.com/v1/team/memberships/{membershipId}
 
 Get details for a membership by ID. Specify the membership ID in the membershipId URI parameter.
 
@@ -476,7 +476,7 @@ Get details for a membership by ID. Specify the membership ID in the membershipI
 
 #### teamMemberships.updateTeamMembership(queryObject)
 
-[put] https://api.ciscosparkcom/v1/team/memberships/{membershipId}
+[put] https://api.ciscospark.com/v1/team/memberships/{membershipId}
 
 Updates properties for a membership by ID. Specify the membership ID in the membershipId URI parameter.
 
@@ -493,7 +493,7 @@ Updates properties for a membership by ID. Specify the membership ID in the memb
 
 #### teamMemberships.deleteTeamMembership(queryObject)
 
-[delete] https://api.ciscosparkcom/v1/team/memberships/{membershipId}
+[delete] https://api.ciscospark.com/v1/team/memberships/{membershipId}
 
 Deletes a membership by ID. Specify the membership ID in the membershipId URI parameter.
 
@@ -511,7 +511,7 @@ Query, Create, Update, and Delete Spark Webhooks.
 
 #### webhooks.getWebhooks(queryObject)
 
-[get] https://api.ciscosparkcom/v1/webhooks/
+[get] https://api.ciscospark.com/v1/webhooks/
 
 Lists all of your webhooks.
 
@@ -523,7 +523,7 @@ Lists all of your webhooks.
 
 #### webhooks.createWebhook(queryObject)
 
-[post] https://api.ciscosparkcom/v1/webhooks/
+[post] https://api.ciscospark.com/v1/webhooks/
 
 Creates a webhook.
 
@@ -544,7 +544,7 @@ Creates a webhook.
 
 #### webhooks.getWebhook(queryObject)
 
-[get] https://api.ciscosparkcom/v1/webhooks/{webhookId}
+[get] https://api.ciscospark.com/v1/webhooks/{webhookId}
 
 Shows details for a webhook, by ID. Specify the webhook ID in the webhookId parameter in the URI.
 
@@ -558,7 +558,7 @@ Shows details for a webhook, by ID. Specify the webhook ID in the webhookId para
 
 #### webhooks.updateWebhook(queryObject)
 
-[put] https://api.ciscosparkcom/v1/webhooks/{webhookId}
+[put] https://api.ciscospark.com/v1/webhooks/{webhookId}
 
 Updates a webhook, by ID. Specify the webhook ID in the webhookId parameter in the URI.
 
@@ -576,7 +576,7 @@ Updates a webhook, by ID. Specify the webhook ID in the webhookId parameter in t
 
 #### webhooks.deleteWebhook(queryObject)
 
-[delete] https://api.ciscosparkcom/v1/webhooks/{webhookId}
+[delete] https://api.ciscospark.com/v1/webhooks/{webhookId}
 
 Deletes a webhook, by ID. Specify the webhook ID in the webhookId parameter in the URI.
 
@@ -594,7 +594,7 @@ Query Organizations
 
 #### organizations.getOrganizations(queryObject)
 
-[get] https://api.ciscosparkcom/v1/organizations/
+[get] https://api.ciscospark.com/v1/organizations/
 
 Lists all of your visible Organizations.
 
@@ -606,7 +606,7 @@ Lists all of your visible Organizations.
 
 #### organizations.getOrganization(queryObject)
 
-[get] https://api.ciscosparkcom/v1/organizations/{orgId}
+[get] https://api.ciscospark.com/v1/organizations/{orgId}
 
 Shows details for a organization, by ID. Specify the organization ID in the orgId parameter in the URI.
 
@@ -624,7 +624,7 @@ Query Licenses
 
 #### licenses.getLicenses(queryObject)
 
-[get] https://api.ciscosparkcom/v1/licenses/
+[get] https://api.ciscospark.com/v1/licenses/
 
 Lists all of your visible Licenses.
 
@@ -636,7 +636,7 @@ Lists all of your visible Licenses.
 
 #### licenses.getLicense(queryObject)
 
-[get] https://api.ciscosparkcom/v1/licenses/{licenseId}
+[get] https://api.ciscospark.com/v1/licenses/{licenseId}
 
 Shows details for a license, by ID. Specify the license ID in the licenseId parameter in the URI.
 
@@ -654,7 +654,7 @@ Query Roles
 
 #### roles.getRoles(queryObject)
 
-[get] https://api.ciscosparkcom/v1/roles/
+[get] https://api.ciscospark.com/v1/roles/
 
 Lists all of your visible Roles.
 
@@ -666,7 +666,7 @@ Lists all of your visible Roles.
 
 #### roles.getRole(queryObject)
 
-[get] https://api.ciscosparkcom/v1/roles/{roleId}
+[get] https://api.ciscospark.com/v1/roles/{roleId}
 
 Shows details for a role, by ID. Specify the role ID in the roleId parameter in the URI.
 
@@ -684,7 +684,7 @@ Retrieve Files
 
 #### contents.getContent(queryObject)
 
-[get] https://api.ciscosparkcom/v1/contents/{contentId}
+[get] https://api.ciscospark.com/v1/contents/{contentId}
 
 Retrieve the contents of a file by content ID.
 

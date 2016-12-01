@@ -9,7 +9,7 @@ var _ = require('lodash');
 var jsonParse = when.lift(JSON.parse);
 
 var sparkDef = '../cisco_spark_v1.json';
-var sparkApiBase = 'https://api.ciscosparkcom/v1';
+var sparkApiBase = 'https://api.ciscospark.com/v1';
 
 // read file
 function getSpec(def) {
