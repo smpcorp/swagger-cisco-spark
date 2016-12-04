@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "title": "Spark API",
-        "version": "1.2.1",
+        "version": "1.2.2",
         "description": "Cisco Spark API version 1 Swagger Definition File."
     },
     "externalDocs": {
@@ -81,8 +81,8 @@
         "/people/": {
             "get": {
                 "operationId": "getPeople",
-                "summary": "Returns array of Person objects.",
-                "description": "Search people by email address or dispaly name.",
+                "summary": "Search people by email address or display name.",
+                "description": "Search people by email address or display name. Returns array of Person objects.",
                 "tags": [
                     "people"
                 ],
@@ -98,7 +98,7 @@
                     {
                         "name": "displayName",
                         "in": "query",
-                        "description": "List people whose name starts with this string",
+                        "description": "Person display name",
                         "required": false,
                         "type": "string"
                     },
@@ -114,8 +114,8 @@
             },
             "post": {
                 "operationId": "addPerson",
-                "summary": "Create a Person. Returns Person Object.",
-                "description": "Create a new user account for a given organization. Only an admin can create a new user account.",
+                "summary": "Create a Person for a given organization.",
+                "description": "Create a Person for a given organization. Returns Person object. Only an admin can create a new user account.",
                 "tags": [
                     "people"
                 ],
@@ -132,7 +132,7 @@
                             ],
                             "properties": {
                                 "emails": {
-                                    "description": "Array of emails of Person",
+                                    "description": "Array of emails",
                                     "type": "array",
                                     "items": {
                                         "type": "string",
@@ -152,7 +152,7 @@
                                     "type": "string"
                                 },
                                 "avatar": {
-                                    "description": "URL of Person avatar",
+                                    "description": "Person avatar URL",
                                     "type": "string",
                                     "format": "url"
                                 },
@@ -161,14 +161,14 @@
                                     "type": "string"
                                 },
                                 "roles": {
-                                    "description": "Array of Role IDs of Person",
+                                    "description": "Array of Role IDs",
                                     "type": "array",
                                     "items": {
                                         "type": "string"
                                     }
                                 },
                                 "licenses": {
-                                    "description": "Array of License IDs of Person",
+                                    "description": "Array of License IDs",
                                     "type": "array",
                                     "items": {
                                         "type": "string"
@@ -188,8 +188,8 @@
         "/people/{personId}": {
             "get": {
                 "operationId": "getPerson",
-                "summary": "Return Person Object by ID query.",
-                "description": "Shows details for a person by ID. Specify the person ID in the personId parameter in the URI.",
+                "summary": "Shows details for a person.",
+                "description": "Shows details for a person by ID. Returns Person object.",
                 "tags": [
                     "people"
                 ],
@@ -210,8 +210,8 @@
             },
             "put": {
                 "operationId": "updatePerson",
-                "summary": "Update a Person. Returns Person Object.",
-                "description": "Update details for a person, by ID. Specify the person ID in the personId parameter in the URI. Only an admin can update person details.",
+                "summary": "Update details for a person.",
+                "description": "Update details for a person by ID. Returns Person object. Only an admin can update person details.",
                 "tags": [
                     "people"
                 ],
@@ -238,7 +238,7 @@
                             ],
                             "properties": {
                                 "emails": {
-                                    "description": "Array of emails of Person",
+                                    "description": "Array of emails",
                                     "type": "array",
                                     "items": {
                                         "type": "string",
@@ -292,8 +292,8 @@
             },
             "delete": {
                 "operationId": "deletePerson",
-                "summary": "Delete a Person. Returns null.",
-                "description": "Remove a person from the system. Only an admin can remove a person. Specify the person ID in the personId parameter in the URI.",
+                "summary": "Delete a Person.",
+                "description": "Delete a Person by ID. Only an admin can remove a person.",
                 "tags": [
                     "people"
                 ],
@@ -316,8 +316,8 @@
         "/people/me": {
             "get": {
                 "operationId": "getMe",
-                "summary": "Returns Person object of authenticated user.",
-                "description": "Show the details of the Person Object of the authenticated user.",
+                "summary": "Get the authenticated user.",
+                "description": "Get the authenticated user. Returns a Person object.",
                 "tags": [
                     "people"
                 ],
@@ -331,8 +331,8 @@
         "/rooms/": {
             "get": {
                 "operationId": "getRooms",
-                "summary": "Returns array of Room Objects.",
-                "description": "List rooms. By default, lists rooms to which the authenticated user belongs.",
+                "summary": "Get Rooms of which authenticated user belongs.",
+                "description": "Get Rooms of which authenticated user belongs. Returns array of Room objects. Optionally filter by Team ID or Room type. Room type can either be 'group' or 'direct'.",
                 "tags": [
                     "rooms"
                 ],
@@ -340,14 +340,14 @@
                     {
                         "name": "teamId",
                         "in": "query",
-                        "description": "List rooms with this Team ID",
+                        "description": "Team ID",
                         "required": false,
                         "type": "string"
                     },
                     {
                         "name": "type",
                         "in": "query",
-                        "description": "List rooms of this type",
+                        "description": "Room type",
                         "required": false,
                         "type": "string",
                         "pattern": "(group|direct)"
@@ -364,8 +364,8 @@
             },
             "post": {
                 "operationId": "createRoom",
-                "summary": "Create a Room. Returns Room Object.",
-                "description": "Creates a room. The authenticated user is automatically added as a member of the room. See the Memberships API to learn how to add more people to the room.",
+                "summary": "Create a Room.",
+                "description": "Create a room. Returns Room object. The authenticated user is automatically added as a member of the room. See the Memberships API to learn how to add more people to the room.",
                 "tags": [
                     "rooms"
                 ],
@@ -381,11 +381,11 @@
                             ],
                             "properties": {
                                 "title": {
-                                    "description": "Specify title for new Room",
+                                    "description": "Room title",
                                     "type": "string"
                                 },
                                 "teamId": {
-                                    "description": "Specify Team ID for new Room",
+                                    "description": "Room Team ID",
                                     "type": "string"
                                 }
                             }
@@ -402,8 +402,8 @@
         "/rooms/{roomId}": {
             "get": {
                 "operationId": "getRoom",
-                "summary": "Returns Room Object by ID Query.",
-                "description": "Shows details for a room, by ID. Specify the room ID in the roomId parameter in the URI.",
+                "summary": "Shows details for a specific Room.",
+                "description": "Shows details for a specific Room by ID. Returns Room object by ID Query.",
                 "tags": [
                     "rooms"
                 ],
@@ -424,8 +424,8 @@
             },
             "put": {
                 "operationId": "updateRoom",
-                "summary": "Update a Room. Returns Room Object.",
-                "description": "Updates details for a room, by ID. Specify the room ID in the roomId parameter in the URI.",
+                "summary": "Update a Room.",
+                "description": "Update a Room by ID. Returns Room object.",
                 "tags": [
                     "rooms"
                 ],
@@ -448,7 +448,7 @@
                             ],
                             "properties": {
                                 "title": {
-                                    "description": "Specify new Room title",
+                                    "description": "Room title",
                                     "type": "string"
                                 }
                             }
@@ -463,8 +463,8 @@
             },
             "delete": {
                 "operationId": "deleteRoom",
-                "summary": "Delete a Room. Returns null.",
-                "description": "Deletes a room, by ID. Specify the room ID in the roomId parameter in the URI.",
+                "summary": "Delete a Room.",
+                "description": "Delete a room, by ID.",
                 "tags": [
                     "rooms"
                 ],
@@ -487,8 +487,8 @@
         "/memberships/": {
             "get": {
                 "operationId": "getMemberships",
-                "summary": "Returns array of Membership Objects.",
-                "description": "Lists all room memberships. By default, lists memberships for rooms to which the authenticated user belongs. Use query parameters to filter the response. Use roomId to list memberships for a room, by ID. Use either personId or personEmail to filter the results.",
+                "summary": "Get all room memberships.",
+                "description": "Get all room memberships. Returns array of Membership objects. By default, lists memberships for rooms to which the authenticated user belongs. Optionally can be targeted at a specific Room ID. Optionally can be filtered by either personId or personEmail.",
                 "tags": [
                     "memberships"
                 ],
@@ -496,21 +496,21 @@
                     {
                         "name": "roomId",
                         "in": "query",
-                        "description": "List Memberships with this Room ID",
+                        "description": "Room ID",
                         "required": false,
                         "type": "string"
                     },
                     {
                         "name": "personId",
                         "in": "query",
-                        "description": "List Memberships for this Person ID",
+                        "description": "Person ID",
                         "required": false,
                         "type": "string"
                     },
                     {
                         "name": "personEmail",
                         "in": "query",
-                        "description": "List Memberships for this Person Email",
+                        "description": "Person email",
                         "required": false,
                         "type": "string",
                         "format": "email"
@@ -527,8 +527,8 @@
             },
             "post": {
                 "operationId": "createMembership",
-                "summary": "Create a Membership. Returns Membership Object.",
-                "description": "Add someone to a room by Person ID or email address; optionally making them a moderator.",
+                "summary": "Create a Room Membership.",
+                "description": "Create a Room Membership in a Room by ID. Specifcy the membership target by Person ID or Email. Returns Membership object.",
                 "tags": [
                     "memberships"
                 ],
@@ -544,20 +544,20 @@
                             ],
                             "properties": {
                                 "roomId": {
-                                    "description": "Room ID for Membership",
+                                    "description": "Room ID",
                                     "type": "string"
                                 },
                                 "personId": {
-                                    "description": "Person ID for Membership",
+                                    "description": "Person ID",
                                     "type": "string"
                                 },
                                 "personEmail": {
-                                    "description": "Person Email for Membership",
+                                    "description": "Person email",
                                     "type": "string",
                                     "format": "email"
                                 },
                                 "isModerator": {
-                                    "description": "Specify if Membership is a moderator",
+                                    "description": "Membership is a moderator",
                                     "type": "boolean"
                                 }
                             }
@@ -574,8 +574,8 @@
         "/memberships/{membershipId}": {
             "get": {
                 "operationId": "getMembership",
-                "summary": "Returns Membership Object by ID query.",
-                "description": "Get details for a membership by ID. Specify the membership ID in the membershipId URI parameter.",
+                "summary": "Get details for a membership.",
+                "description": "Get details for a membership by ID. Returns Membership object.",
                 "tags": [
                     "memberships"
                 ],
@@ -596,8 +596,8 @@
             },
             "put": {
                 "operationId": "updateMembership",
-                "summary": "Update a Membership. Returns Membership Object.",
-                "description": "Updates properties for a membership by ID. Specify the membership ID in the membershipId URI parameter.",
+                "summary": "Update a Membership.",
+                "description": "Update a Membership by ID. Returns Membership object.",
                 "tags": [
                     "memberships"
                 ],
@@ -620,7 +620,7 @@
                             ],
                             "properties": {
                                 "isModerator": {
-                                    "description": "Update membership moderator status",
+                                    "description": "Membership is a moderator",
                                     "type": "boolean"
                                 }
                             }
@@ -635,8 +635,8 @@
             },
             "delete": {
                 "operationId": "deleteMembership",
-                "summary": "Delete a Membership. Returns null.",
-                "description": "Deletes a membership by ID. Specify the membership ID in the membershipId URI parameter.",
+                "summary": "Delete a Membership.",
+                "description": "Delete a membership by ID.",
                 "tags": [
                     "memberships"
                 ],
@@ -659,8 +659,8 @@
         "/messages/": {
             "get": {
                 "operationId": "getMessages",
-                "summary": "Returns array of Message Objects.",
-                "description": "Lists all messages in a room with roomType. If present, includes the associated media content attachment for each message. The roomType could be a group or direct (1:1). The list sorts the messages in descending order by creation date.",
+                "summary": "Get all messages in a room.",
+                "description": "Get all messages in a room by ID. Returns array of Message objects.",
                 "tags": [
                     "messages"
                 ],
@@ -668,21 +668,21 @@
                     {
                         "name": "roomId",
                         "in": "query",
-                        "description": "List Messages in this Room ID",
+                        "description": "Room ID",
                         "required": true,
                         "type": "string"
                     },
                     {
                         "name": "mentionedPeople",
                         "in": "query",
-                        "description": "List Messages for this Person ID",
+                        "description": "Person ID",
                         "required": false,
                         "type": "string"
                     },
                     {
                         "name": "before",
                         "in": "query",
-                        "description": "List Messages before this date/time stamp",
+                        "description": "Marker date/time",
                         "required": false,
                         "type": "string",
                         "format": "date-time"
@@ -690,7 +690,7 @@
                     {
                         "name": "beforeMessage",
                         "in": "query",
-                        "description": "List Messages before this Message ID",
+                        "description": "Marker Message ID",
                         "required": false,
                         "type": "string"
                     },
@@ -706,8 +706,8 @@
             },
             "post": {
                 "operationId": "createMessage",
-                "summary": "Create a Message. Returns Message Object.",
-                "description": "Posts a plain text or markdown formatted message, and optionally, a media content attachment, to a room.",
+                "summary": "Create a Message.",
+                "description": "Create a Message. Returns Message object. Optionally, specify the message as text or markdown and include an attachment.",
                 "tags": [
                     "messages"
                 ],
@@ -720,15 +720,15 @@
                             "type": "object",
                             "properties": {
                                 "roomId": {
-                                    "description": "Room ID for Message",
+                                    "description": "Room ID",
                                     "type": "string"
                                 },
                                 "toPersonId": {
-                                    "description": "Person ID for Message",
+                                    "description": "Person ID",
                                     "type": "string"
                                 },
                                 "toPersonEmail": {
-                                    "description": "Person Email for Message",
+                                    "description": "Person Email",
                                     "type": "string",
                                     "format": "email"
                                 },
@@ -745,7 +745,7 @@
                                     "type": "string"
                                 },
                                 "files": {
-                                    "description": "Internet accessable File URL",
+                                    "description": "File URL",
                                     "type": "string",
                                     "format": "url"
                                 }
@@ -763,8 +763,8 @@
         "/messages/{messageId}": {
             "get": {
                 "operationId": "getMessage",
-                "summary": "Returns Message Object by ID query.",
-                "description": "Shows details for a message, by message ID. Specify the message ID in the messageId parameter in the URI.",
+                "summary": "Get a Message.",
+                "description": "Get a Message by ID. Returns Message object.",
                 "tags": [
                     "messages"
                 ],
@@ -785,8 +785,8 @@
             },
             "delete": {
                 "operationId": "deleteMessage",
-                "summary": "Delete a Message. Returns null.",
-                "description": "Deletes a message, by message ID. Specify the message ID in the messageId parameter in the URI.",
+                "summary": "Delete a Message.",
+                "description": "Deletes a message by ID.",
                 "tags": [
                     "messages"
                 ],
@@ -809,8 +809,8 @@
         "/teams/": {
             "get": {
                 "operationId": "getTeams",
-                "summary": "Returns array of Team Objects.",
-                "description": "Lists teams to which the authenticated user belongs.",
+                "summary": "Get Teams.",
+                "description": "Get Teams to which the authenticated user belongs. Returns array of Team objects.",
                 "tags": [
                     "teams"
                 ],
@@ -827,8 +827,8 @@
             },
             "post": {
                 "operationId": "createTeam",
-                "summary": "Create a Team. Returns Team Object.",
-                "description": "Creates a team. The authenticated user is automatically added as a member of the team. See the Team Memberships API to learn how to add more people to the team.",
+                "summary": "Create a Team.",
+                "description": "Create a Team. Returns Team object. The authenticated user is automatically added as a member of the team. See the Team Memberships API to learn how to add more people to the team.",
                 "tags": [
                     "teams"
                 ],
@@ -844,7 +844,7 @@
                             ],
                             "properties": {
                                 "name": {
-                                    "description": "Name of Team",
+                                    "description": "Team name",
                                     "type": "string"
                                 }
                             }
@@ -861,8 +861,8 @@
         "/teams/{teamId}": {
             "get": {
                 "operationId": "getTeam",
-                "summary": "Returns Team Object by ID query.",
-                "description": "Shows details for a team, by ID. Specify the room ID in the teamId parameter in the URI.",
+                "summary": "Get Team.",
+                "description": "Get Team by ID. Returns Team object.",
                 "tags": [
                     "teams"
                 ],
@@ -883,8 +883,8 @@
             },
             "put": {
                 "operationId": "updateTeam",
-                "summary": "Update a Team. Returns Team Object.",
-                "description": "Updates details for a team, by ID. Specify the team ID in the teamId parameter in the URI.",
+                "summary": "Update a Team.",
+                "description": "Update a Team by ID. Returns Team object.",
                 "tags": [
                     "teams"
                 ],
@@ -907,7 +907,7 @@
                             ],
                             "properties": {
                                 "name": {
-                                    "description": "Specify new Team name",
+                                    "description": "Team name",
                                     "type": "string"
                                 }
                             }
@@ -922,8 +922,8 @@
             },
             "delete": {
                 "operationId": "deleteTeam",
-                "summary": "Delete a Team. Returns null.",
-                "description": "Deletes a team, by ID. Specify the team ID in the teamId parameter in the URI.",
+                "summary": "Delete a Team.",
+                "description": "Delete a team by ID.",
                 "tags": [
                     "teams"
                 ],
@@ -946,8 +946,8 @@
         "/team/memberships/": {
             "get": {
                 "operationId": "getTeamMemberships",
-                "summary": "Returns array of TeamMembership Objects.",
-                "description": "Lists all team memberships. By default, lists memberships for teams to which the authenticated user belongs. Use query parameters to filter the response. Use teamId to list memberships for a team, by ID.",
+                "summary": "Get Team Memberships.",
+                "description": "Get Team Memberships by ID. Returns array of TeamMembership objects. If Team ID is not specified, lists memberships for teams to which the authenticated user belongs.",
                 "tags": [
                     "teamMemberships"
                 ],
@@ -955,7 +955,7 @@
                     {
                         "name": "teamId",
                         "in": "query",
-                        "description": "List memberships for this Team ID",
+                        "description": "Team ID",
                         "required": true,
                         "type": "string"
                     },
@@ -971,8 +971,8 @@
             },
             "post": {
                 "operationId": "createTeamMembership",
-                "summary": "Create a Team Membership. Returns TeamMembership Object.",
-                "description": "Add someone to a team by Person ID or email address; optionally making them a moderator.",
+                "summary": "Create a Team Membership. Returns TeamMembership object.",
+                "description": "Create a Team Membership by Person ID or email address. Returns TeamMembership object. Optionally make membership a moderator.",
                 "tags": [
                     "teamMemberships"
                 ],
@@ -988,20 +988,20 @@
                             ],
                             "properties": {
                                 "teamId": {
-                                    "description": "Team ID for Team Membership",
+                                    "description": "Team ID",
                                     "type": "string"
                                 },
                                 "personId": {
-                                    "description": "Person ID for Team Membership",
+                                    "description": "Person ID",
                                     "type": "string"
                                 },
                                 "personEmail": {
-                                    "description": "Person Email for Team Membership",
+                                    "description": "Person Email",
                                     "type": "string",
                                     "format": "email"
                                 },
                                 "isModerator": {
-                                    "description": "Specify if Team Membership is a moderator",
+                                    "description": "Team Membership is a moderator",
                                     "type": "boolean"
                                 }
                             }
@@ -1018,8 +1018,8 @@
         "/team/memberships/{membershipId}": {
             "get": {
                 "operationId": "getTeamMembership",
-                "summary": "Returns TeamMembership Object by ID query.",
-                "description": "Get details for a membership by ID. Specify the membership ID in the membershipId URI parameter.",
+                "summary": "Get Team Memberships.",
+                "description": "Get Team Memberships. Returns TeamMembership object.",
                 "tags": [
                     "teamMemberships"
                 ],
@@ -1040,8 +1040,8 @@
             },
             "put": {
                 "operationId": "updateTeamMembership",
-                "summary": "Update a Team Membership. Returns TeamMembership Object.",
-                "description": "Updates properties for a membership by ID. Specify the membership ID in the membershipId URI parameter.",
+                "summary": "Update a Team Membership.",
+                "description": "UUpdate a Team Membership by ID. Returns TeamMembership object.",
                 "tags": [
                     "teamMemberships"
                 ],
@@ -1064,7 +1064,7 @@
                             ],
                             "properties": {
                                 "isModerator": {
-                                    "description": "Update team membership moderator status",
+                                    "description": "Team Membership is a moderator",
                                     "type": "boolean"
                                 }
                             }
@@ -1079,8 +1079,8 @@
             },
             "delete": {
                 "operationId": "deleteTeamMembership",
-                "summary": "Delete a Team Membership. Returns null.",
-                "description": "Deletes a membership by ID. Specify the membership ID in the membershipId URI parameter.",
+                "summary": "Delete a Team Membership.",
+                "description": "Delete a Team Membership by ID.",
                 "tags": [
                     "teamMemberships"
                 ],
@@ -1103,8 +1103,8 @@
         "/webhooks/": {
             "get": {
                 "operationId": "getWebhooks",
-                "summary": "Returns array of Webhook Objects.",
-                "description": "Lists all of your webhooks.",
+                "summary": "Get Webhooks.",
+                "description": "Get Webhooks. Returns an array of Webhook objects.",
                 "tags": [
                     "webhooks"
                 ],
@@ -1121,8 +1121,8 @@
             },
             "post": {
                 "operationId": "createWebhook",
-                "summary": "Create a Webhook. Returns Webhook Object.",
-                "description": "Creates a webhook.",
+                "summary": "Create a Webhook.",
+                "description": "Create a webhook. Returns a Webhook object.",
                 "tags": [
                     "webhooks"
                 ],
@@ -1145,7 +1145,7 @@
                                     "type": "string"
                                 },
                                 "targetUrl": {
-                                    "description": "Webhook URL",
+                                    "description": "Webhook target URL",
                                     "type": "string",
                                     "format": "url"
                                 },
@@ -1162,7 +1162,7 @@
                                     "type": "string"
                                 },
                                 "secret": {
-                                    "description": "Webhook Secret",
+                                    "description": "Webhook secret",
                                     "type": "string"
                                 }
                             }
@@ -1179,8 +1179,8 @@
         "/webhooks/{webhookId}": {
             "get": {
                 "operationId": "getWebhook",
-                "summary": "Returns Webhook Object by ID query.",
-                "description": "Shows details for a webhook, by ID. Specify the webhook ID in the webhookId parameter in the URI.",
+                "summary": "Get Webhook.",
+                "description": "Get Webhook by ID. Returns a Webhook object.",
                 "tags": [
                     "webhooks"
                 ],
@@ -1201,8 +1201,8 @@
             },
             "put": {
                 "operationId": "updateWebhook",
-                "summary": "Update a Webhook. Returns Webhook Object.",
-                "description": "Updates a webhook, by ID. Specify the webhook ID in the webhookId parameter in the URI.",
+                "summary": "Update a Webhook.",
+                "description": "Update a webhook by ID. Returns a Webhook object.",
                 "tags": [
                     "webhooks"
                 ],
@@ -1226,11 +1226,11 @@
                             ],
                             "properties": {
                                 "name": {
-                                    "description": "Update Webhook name",
+                                    "description": "Webhook name",
                                     "type": "string"
                                 },
                                 "targetUrl": {
-                                    "description": "Update Webhook URL",
+                                    "description": "Webhook target URL",
                                     "type": "string",
                                     "format": "url"
                                 }
@@ -1246,8 +1246,8 @@
             },
             "delete": {
                 "operationId": "deleteWebhook",
-                "summary": "Delete a Webhook. Returns null.",
-                "description": "Deletes a webhook, by ID. Specify the webhook ID in the webhookId parameter in the URI.",
+                "summary": "Delete a Webhook.",
+                "description": "Delete a Webhook by ID.",
                 "tags": [
                     "webhooks"
                 ],
@@ -1270,8 +1270,8 @@
         "/organizations/": {
             "get": {
                 "operationId": "getOrganizations",
-                "summary": "Returns array of Organization Objects.",
-                "description": "Lists all of your visible Organizations.",
+                "summary": "Get Organizations for authenticated User. Returns array of Organization objects.",
+                "description": "Get Organizations for authenticated User. Returns array of Organization objects.",
                 "tags": [
                     "organizations"
                 ],
@@ -1290,8 +1290,8 @@
         "/organizations/{orgId}": {
             "get": {
                 "operationId": "getOrganization",
-                "summary": "Returns Organization Object by ID Query.",
-                "description": "Shows details for a organization, by ID. Specify the organization ID in the orgId parameter in the URI.",
+                "summary": "Get Organization.",
+                "description": "Get Organization by ID. Returns Organization object.",
                 "tags": [
                     "organizations"
                 ],
@@ -1314,8 +1314,8 @@
         "/licenses/": {
             "get": {
                 "operationId": "getLicenses",
-                "summary": "Returns array of License Objects.",
-                "description": "Lists all of your visible Licenses.",
+                "summary": "Get Licenses.",
+                "description": "Get Licenses. Returns array of License objects.",
                 "tags": [
                     "licenses"
                 ],
@@ -1334,8 +1334,8 @@
         "/licenses/{licenseId}": {
             "get": {
                 "operationId": "getLicense",
-                "summary": "Returns License Object by ID Query.",
-                "description": "Shows details for a license, by ID. Specify the license ID in the licenseId parameter in the URI.",
+                "summary": "Get License.",
+                "description": "Get License by ID. Returns License object.",
                 "tags": [
                     "licenses"
                 ],
@@ -1358,8 +1358,8 @@
         "/roles/": {
             "get": {
                 "operationId": "getRoles",
-                "summary": "Returns array of Role Objects.",
-                "description": "Lists all of your visible Roles.",
+                "summary": "Get Roles.",
+                "description": "Get Roles. Returns an array of Role objects.",
                 "tags": [
                     "roles"
                 ],
@@ -1378,8 +1378,8 @@
         "/roles/{roleId}": {
             "get": {
                 "operationId": "getRole",
-                "summary": "Returns Role Object by ID Query.",
-                "description": "Shows details for a role, by ID. Specify the role ID in the roleId parameter in the URI.",
+                "summary": "Get Role.",
+                "description": "Get Role by ID. Returns Role object.",
                 "tags": [
                     "roles"
                 ],
@@ -1402,8 +1402,8 @@
         "/contents/{contentId}": {
             "get": {
                 "operationId": "getContent",
-                "summary": "Returns File binary by ID.",
-                "description": "Retrieve the contents of a file by content ID.",
+                "summary": "Get File contents.",
+                "description": "Get File contents by ID. Returns binary of file.",
                 "tags": [
                     "contents"
                 ],
@@ -1434,10 +1434,11 @@
                 },
                 "emails": {
                     "type": "array",
+                    "description": "Person email array",
                     "items": {
                         "type": "string",
                         "format": "email",
-                        "description": "Email"
+                        "description": "Person email"
                     }
                 },
                 "displayName": {
@@ -1447,16 +1448,16 @@
                 "avatar": {
                     "type": "string",
                     "format": "url",
-                    "description": "URL of Person avatar"
+                    "description": "Person avatar URL"
                 },
                 "created": {
                     "type": "string",
-                    "format": "dateTime",
-                    "description": "Date/Time Person object was created"
+                    "format": "date-time",
+                    "description": "Person creation date/time"
                 },
                 "timeZone": {
                     "type": "string",
-                    "description": "Time Zone that user is located"
+                    "description": "Person time zone"
                 }
             }
         },
@@ -1469,15 +1470,15 @@
                 },
                 "title": {
                     "type": "string",
-                    "description": "Room Title"
+                    "description": "Room title"
                 },
                 "type": {
                     "type": "string",
-                    "description": "Room Type"
+                    "description": "Room type"
                 },
                 "isLocked": {
                     "type": "boolean",
-                    "description": "Room moderation status"
+                    "description": "Room is moderated"
                 },
                 "teamId": {
                     "type": "string",
@@ -1489,13 +1490,13 @@
                 },
                 "lastActivity": {
                     "type": "string",
-                    "format": "dateTime",
-                    "description": "Date/Time of Room's last activity"
+                    "format": "date-time",
+                    "description": "Room last activity date/time"
                 },
                 "created": {
                     "type": "string",
-                    "format": "dateTime",
-                    "description": "Date/Time Room was created"
+                    "format": "date-time",
+                    "description": "Room creation date/time"
                 }
             }
         },
@@ -1508,16 +1509,16 @@
                 },
                 "roomId": {
                     "type": "string",
-                    "description": "Membership Room ID"
+                    "description": "Room ID"
                 },
                 "personId": {
                     "type": "string",
-                    "description": "Membership Person ID"
+                    "description": "Person ID"
                 },
                 "personEmail": {
                     "type": "string",
                     "format": "email",
-                    "description": "Membership Person Email"
+                    "description": "Person email"
                 },
                 "personDisplayName": {
                     "type": "string",
@@ -1525,16 +1526,16 @@
                 },
                 "isModerator": {
                     "type": "boolean",
-                    "description": "Membership moderator status"
+                    "description": "Membership is moderator"
                 },
                 "isMonitor": {
                     "type": "boolean",
-                    "description": "Membership monitor status"
+                    "description": "Membership is monitor"
                 },
                 "created": {
                     "type": "string",
-                    "format": "dateTime",
-                    "description": "Date/Time Membership was created"
+                    "format": "date-time",
+                    "description": "Membership creation date/time"
                 }
             }
         },
@@ -1547,24 +1548,24 @@
                 },
                 "roomId": {
                     "type": "string",
-                    "description": "Message in Room ID"
+                    "description": "Room ID"
                 },
                 "roomType": {
                     "type": "string",
-                    "description": "Message in Room Type"
+                    "description": "Room type"
                 },
                 "toPersonId": {
                     "type": "string",
-                    "description": "Message to person ID"
+                    "description": "Person ID (for type=direct)"
                 },
                 "toPersonEmail": {
                     "type": "string",
                     "format": "email",
-                    "description": "Message to person Email"
+                    "description": "Person email (for type=direct)"
                 },
                 "text": {
                     "type": "string",
-                    "description": "Message in plain test format"
+                    "description": "Message in plain text format"
                 },
                 "markdown": {
                     "type": "string",
@@ -1576,6 +1577,7 @@
                 },
                 "files": {
                     "type": "array",
+                    "description": "File URL array",
                     "items": {
                         "type": "string",
                         "format": "url",
@@ -1584,21 +1586,21 @@
                 },
                 "personId": {
                     "type": "string",
-                    "description": "Message by Person ID"
+                    "description": "Person ID"
                 },
                 "personEmail": {
                     "type": "string",
                     "format": "email",
-                    "description": "Message by Person Email"
+                    "description": "Person Email"
                 },
                 "created": {
                     "type": "string",
-                    "format": "dateTime",
-                    "description": "Date/Time Message was created"
+                    "format": "date-time",
+                    "description": "Message creation date/time"
                 },
                 "mentionedPeople": {
                     "type": "array",
-                    "description": "Person IDs mentioned in Message",
+                    "description": "Person ID array",
                     "items": {
                         "type": "string",
                         "description": "Person ID"
@@ -1623,8 +1625,8 @@
                 },
                 "created": {
                     "type": "string",
-                    "format": "dateTime",
-                    "description": "Date/Time Team was created"
+                    "format": "date-time",
+                    "description": "Team creation date/time"
                 }
             }
         },
@@ -1641,12 +1643,12 @@
                 },
                 "personId": {
                     "type": "string",
-                    "description": "Team Membership Person ID"
+                    "description": "Person ID"
                 },
                 "personEmail": {
                     "type": "string",
                     "format": "email",
-                    "description": "Team Membership Person Email"
+                    "description": "Person email"
                 },
                 "personDisplayName": {
                     "type": "string",
@@ -1654,12 +1656,12 @@
                 },
                 "isModerator": {
                     "type": "boolean",
-                    "description": "Team Membership moderator status"
+                    "description": "Team Membership is moderator"
                 },
                 "created": {
                     "type": "string",
-                    "format": "dateTime",
-                    "description": "Date/Time Team Membership was created"
+                    "format": "date-time",
+                    "description": "Team Membership creation date/time"
                 }
             }
         },
@@ -1677,7 +1679,7 @@
                 "targetUrl": {
                     "type": "string",
                     "format": "url",
-                    "description": "Webhook URL target"
+                    "description": "Webhook target URL"
                 },
                 "resource": {
                     "type": "string",
@@ -1686,7 +1688,7 @@
                 },
                 "event": {
                     "type": "string",
-                    "description": "Webhook event trigger",
+                    "description": "Webhook event",
                     "pattern": "(all|created|updated|deleted)"
                 },
                 "orgId": {
@@ -1695,7 +1697,7 @@
                 },
                 "createdBy": {
                     "type": "string",
-                    "description": "Webhook created by ID"
+                    "description": "Webhook created by Person ID"
                 },
                 "appId": {
                     "type": "string",
@@ -1703,11 +1705,11 @@
                 },
                 "ownedBy": {
                     "type": "string",
-                    "description": "Webhook owner"
+                    "description": "Webhook owner Person ID"
                 },
                 "filter": {
                     "type": "string",
-                    "description": "Webhook result filter"
+                    "description": "Webhook filter"
                 },
                 "status": {
                     "type": "string",
@@ -1719,8 +1721,8 @@
                 },
                 "created": {
                     "type": "string",
-                    "format": "dateTime",
-                    "description": "Date/Time Webhook was created"
+                    "format": "date-time",
+                    "description": "Webhook creation date/time"
                 }
             }
         },
@@ -1737,8 +1739,8 @@
                 },
                 "created": {
                     "type": "string",
-                    "format": "dateTime",
-                    "description": "Date/Time Organization was created"
+                    "format": "date-time",
+                    "description": "Organization creation date/time"
                 }
             }
         },
