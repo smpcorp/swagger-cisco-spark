@@ -8,8 +8,7 @@ var _ = require('lodash');
 
 var jsonParse = when.lift(JSON.parse);
 
-var sparkDef = '../cisco_spark_v1.json';
-var sparkApiBase = 'https://api.ciscospark.com/v1';
+var swaggerDef = process.env.SWAGGER_JSON;
 
 // read file
 function getSpec(def) {
@@ -24,22 +23,35 @@ function getSpec(def) {
   });
 }
 
+// extend String prototype
 String.prototype.toProper = function() {
   return this[0].toUpperCase() + this.slice(1);
 };
 
-var title = '# Cisco Spark Swagger Definition';
-var subtitle = 'Swagger Definition for the Cisco Spark API version 1';
-var intro = '*Note: This is a generated README file. For details on the data types in the examples, reference [developer.ciscospark.com](https://developer.ciscospark.com).*';
+var title = '# ';
+var subtitle = '#### ';
+var version = 'File version v';
+var intro = '';
 var resources = {};
+var modesl = {};
+var swaggerApiBase = '';
 
-var processedSpec = getSpec(sparkDef)
+var processedSpec = getSpec(swaggerDef)
+
+  // proces spec and initialize varibale content
   .then(spec => {
+    title += spec.info.title;
+    subtitle += spec.info.description;
+    version += spec.info.version;
+    intro += format('*Note: This is a generated README file. For details on the data types in the examples, reference the developer docs [here](%s).*', spec.externalDocs.url);
+    swaggerApiBase += format('%s://%s', spec.schemes[0], path.join(spec.host, spec.basePath));
     _.forEach(spec.tags, tag => {
       resources[tag.name] = { description: tag.description, methods: {} };
     });
     return when(spec);
   })
+
+  // process resources
   .then(spec => {
     // loop through paths
     _.forEach(_.keys(spec.paths), urlPath => {
@@ -117,9 +129,9 @@ var processedSpec = getSpec(sparkDef)
 
               }
 
-              // add method to resources  object
+              // add method to resources to object
               resources[tag].methods[spec.paths[urlPath][httpMethod].operationId] = {
-                url: sparkApiBase + urlPath,
+                url: swaggerApiBase + urlPath,
                 httpMethod: httpMethod,
                 description: spec.paths[urlPath][httpMethod].description,
                 example: example != '' ? format('{\n%s\n}', example) : '{}'
@@ -128,27 +140,45 @@ var processedSpec = getSpec(sparkDef)
           });
       });
     });
+
+    return spec;
   });
 
 // assemble README markdown from gnerated resources object
 when(processedSpec)
-  .then(() => {
-    var readme = format('%s\n\n%s\n\n%s\n\n', title, subtitle, intro);
+  .then(spec => {
+    // add readme preamble
+    var readme = format('%s\n\n%s\n\n%s\n\n%s\n\n', title, subtitle, version, intro);
+
+    // add API methods
+    readme += '## API Methods\n\n';
     _.forEach(_.keys(resources), resource => {
       // add resource title and description
       readme += format('### %s\n\n%s\n\n',
         resource.toProper(),
         resources[resource].description);
+
       _.forEach(_.keys(resources[resource].methods), method => {
         // add httpMethod and description
-        readme += format('#### %s.%s(queryObject)\n\n[%s] %s\n\n%s\n\n**Example queryObject:**\n\n```json\n%s\n```\n\n',
+        readme += format('#### %s.%s(queryObject)\n\n%s\n\n**Example queryObject:**\n\n```json\n%s\n```\n\n',
           resource,
           method,
-          resources[resource].methods[method].httpMethod,
-          resources[resource].methods[method].url,
           resources[resource].methods[method].description,
           resources[resource].methods[method].example);
       });
+    });
+
+    // add API models
+    readme += '## API Models\n\n';
+    _.forEach(_.keys(spec.definitions), model => {
+      readme += format('#### %s\n\n', model);
+      var properties = _.keys(spec.definitions[model].properties);
+      _.forEach(properties, property => {
+        var type = spec.definitions[model].properties[property].type;
+        var description = spec.definitions[model].properties[property].description;
+        readme += format('- `%s` : **[%s]** %s\n', property, type, description);
+      });
+      readme += '\n\n';
     });
 
     return when(readme);

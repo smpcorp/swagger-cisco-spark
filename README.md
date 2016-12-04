@@ -1,8 +1,12 @@
-# Cisco Spark Swagger Definition
+# Spark API
 
-Swagger Definition for the Cisco Spark API version 1
+#### Cisco Spark API version 1 Swagger Definition File.
 
-*Note: This is a generated README file. For details on the data types in the examples, reference [developer.ciscospark.com](https://developer.ciscospark.com).*
+File version v1.2.2
+
+*Note: This is a generated README file. For details on the data types in the examples, reference the developer docs [here](https://developer.ciscospark.com).*
+
+## API Methods
 
 ### People
 
@@ -10,9 +14,7 @@ Query, Create, Update, and Delete Spark Users.
 
 #### people.getPeople(queryObject)
 
-[get] https://api.ciscospark.com/v1/people/
-
-Search people by email address or dispaly name.
+Search people by email address or display name. Returns array of Person objects.
 
 **Example queryObject:**
 
@@ -25,9 +27,7 @@ Search people by email address or dispaly name.
 
 #### people.addPerson(queryObject)
 
-[post] https://api.ciscospark.com/v1/people/
-
-Create a new user account for a given organization. Only an admin can create a new user account.
+Create a Person for a given organization. Returns Person object. Only an admin can create a new user account.
 
 **Example queryObject:**
 
@@ -48,9 +48,7 @@ Create a new user account for a given organization. Only an admin can create a n
 
 #### people.getPerson(queryObject)
 
-[get] https://api.ciscospark.com/v1/people/{personId}
-
-Shows details for a person by ID. Specify the person ID in the personId parameter in the URI.
+Shows details for a person by ID. Returns Person object.
 
 **Example queryObject:**
 
@@ -62,9 +60,7 @@ Shows details for a person by ID. Specify the person ID in the personId paramete
 
 #### people.updatePerson(queryObject)
 
-[put] https://api.ciscospark.com/v1/people/{personId}
-
-Update details for a person, by ID. Specify the person ID in the personId parameter in the URI. Only an admin can update person details.
+Update details for a person by ID. Returns Person object. Only an admin can update person details.
 
 **Example queryObject:**
 
@@ -86,9 +82,7 @@ Update details for a person, by ID. Specify the person ID in the personId parame
 
 #### people.deletePerson(queryObject)
 
-[delete] https://api.ciscospark.com/v1/people/{personId}
-
-Remove a person from the system. Only an admin can remove a person. Specify the person ID in the personId parameter in the URI.
+Delete a Person by ID. Only an admin can remove a person.
 
 **Example queryObject:**
 
@@ -100,9 +94,7 @@ Remove a person from the system. Only an admin can remove a person. Specify the 
 
 #### people.getMe(queryObject)
 
-[get] https://api.ciscospark.com/v1/people/me
-
-Show the details of the Person Object of the authenticated user.
+Get the authenticated user. Returns a Person object.
 
 **Example queryObject:**
 
@@ -116,9 +108,7 @@ Query, Create, Update, and Delete Spark Rooms.
 
 #### rooms.getRooms(queryObject)
 
-[get] https://api.ciscospark.com/v1/rooms/
-
-List rooms. By default, lists rooms to which the authenticated user belongs.
+Get Rooms of which authenticated user belongs. Returns array of Room objects. Optionally filter by Team ID or Room type. Room type can either be 'group' or 'direct'.
 
 **Example queryObject:**
 
@@ -131,9 +121,7 @@ List rooms. By default, lists rooms to which the authenticated user belongs.
 
 #### rooms.createRoom(queryObject)
 
-[post] https://api.ciscospark.com/v1/rooms/
-
-Creates a room. The authenticated user is automatically added as a member of the room. See the Memberships API to learn how to add more people to the room.
+Create a room. Returns Room object. The authenticated user is automatically added as a member of the room. See the Memberships API to learn how to add more people to the room.
 
 **Example queryObject:**
 
@@ -148,9 +136,7 @@ Creates a room. The authenticated user is automatically added as a member of the
 
 #### rooms.getRoom(queryObject)
 
-[get] https://api.ciscospark.com/v1/rooms/{roomId}
-
-Shows details for a room, by ID. Specify the room ID in the roomId parameter in the URI.
+Shows details for a specific Room by ID. Returns Room object by ID Query.
 
 **Example queryObject:**
 
@@ -162,9 +148,7 @@ Shows details for a room, by ID. Specify the room ID in the roomId parameter in 
 
 #### rooms.updateRoom(queryObject)
 
-[put] https://api.ciscospark.com/v1/rooms/{roomId}
-
-Updates details for a room, by ID. Specify the room ID in the roomId parameter in the URI.
+Update a Room by ID. Returns Room object.
 
 **Example queryObject:**
 
@@ -179,9 +163,7 @@ Updates details for a room, by ID. Specify the room ID in the roomId parameter i
 
 #### rooms.deleteRoom(queryObject)
 
-[delete] https://api.ciscospark.com/v1/rooms/{roomId}
-
-Deletes a room, by ID. Specify the room ID in the roomId parameter in the URI.
+Delete a room, by ID.
 
 **Example queryObject:**
 
@@ -197,9 +179,7 @@ Query, Create, Update, and Delete Spark Room Memberships.
 
 #### memberships.getMemberships(queryObject)
 
-[get] https://api.ciscospark.com/v1/memberships/
-
-Lists all room memberships. By default, lists memberships for rooms to which the authenticated user belongs. Use query parameters to filter the response. Use roomId to list memberships for a room, by ID. Use either personId or personEmail to filter the results.
+Get all room memberships. Returns array of Membership objects. By default, lists memberships for rooms to which the authenticated user belongs. Optionally can be targeted at a specific Room ID. Optionally can be filtered by either personId or personEmail.
 
 **Example queryObject:**
 
@@ -213,9 +193,7 @@ Lists all room memberships. By default, lists memberships for rooms to which the
 
 #### memberships.createMembership(queryObject)
 
-[post] https://api.ciscospark.com/v1/memberships/
-
-Add someone to a room by Person ID or email address; optionally making them a moderator.
+Create a Room Membership in a Room by ID. Specifcy the membership target by Person ID or Email. Returns Membership object.
 
 **Example queryObject:**
 
@@ -232,9 +210,7 @@ Add someone to a room by Person ID or email address; optionally making them a mo
 
 #### memberships.getMembership(queryObject)
 
-[get] https://api.ciscospark.com/v1/memberships/{membershipId}
-
-Get details for a membership by ID. Specify the membership ID in the membershipId URI parameter.
+Get details for a membership by ID. Returns Membership object.
 
 **Example queryObject:**
 
@@ -246,9 +222,7 @@ Get details for a membership by ID. Specify the membership ID in the membershipI
 
 #### memberships.updateMembership(queryObject)
 
-[put] https://api.ciscospark.com/v1/memberships/{membershipId}
-
-Updates properties for a membership by ID. Specify the membership ID in the membershipId URI parameter.
+Update a Membership by ID. Returns Membership object.
 
 **Example queryObject:**
 
@@ -263,9 +237,7 @@ Updates properties for a membership by ID. Specify the membership ID in the memb
 
 #### memberships.deleteMembership(queryObject)
 
-[delete] https://api.ciscospark.com/v1/memberships/{membershipId}
-
-Deletes a membership by ID. Specify the membership ID in the membershipId URI parameter.
+Delete a membership by ID.
 
 **Example queryObject:**
 
@@ -281,9 +253,7 @@ Query, Create, and Delete Spark Messages.
 
 #### messages.getMessages(queryObject)
 
-[get] https://api.ciscospark.com/v1/messages/
-
-Lists all messages in a room with roomType. If present, includes the associated media content attachment for each message. The roomType could be a group or direct (1:1). The list sorts the messages in descending order by creation date.
+Get all messages in a room by ID. Returns array of Message objects.
 
 **Example queryObject:**
 
@@ -298,9 +268,7 @@ Lists all messages in a room with roomType. If present, includes the associated 
 
 #### messages.createMessage(queryObject)
 
-[post] https://api.ciscospark.com/v1/messages/
-
-Posts a plain text or markdown formatted message, and optionally, a media content attachment, to a room.
+Create a Message. Returns Message object. Optionally, specify the message as text or markdown and include an attachment.
 
 **Example queryObject:**
 
@@ -320,9 +288,7 @@ Posts a plain text or markdown formatted message, and optionally, a media conten
 
 #### messages.getMessage(queryObject)
 
-[get] https://api.ciscospark.com/v1/messages/{messageId}
-
-Shows details for a message, by message ID. Specify the message ID in the messageId parameter in the URI.
+Get a Message by ID. Returns Message object.
 
 **Example queryObject:**
 
@@ -334,9 +300,7 @@ Shows details for a message, by message ID. Specify the message ID in the messag
 
 #### messages.deleteMessage(queryObject)
 
-[delete] https://api.ciscospark.com/v1/messages/{messageId}
-
-Deletes a message, by message ID. Specify the message ID in the messageId parameter in the URI.
+Deletes a message by ID.
 
 **Example queryObject:**
 
@@ -352,9 +316,7 @@ Query, Create, Update, and Delete Spark Teams.
 
 #### teams.getTeams(queryObject)
 
-[get] https://api.ciscospark.com/v1/teams/
-
-Lists teams to which the authenticated user belongs.
+Get Teams to which the authenticated user belongs. Returns array of Team objects.
 
 **Example queryObject:**
 
@@ -364,9 +326,7 @@ Lists teams to which the authenticated user belongs.
 
 #### teams.createTeam(queryObject)
 
-[post] https://api.ciscospark.com/v1/teams/
-
-Creates a team. The authenticated user is automatically added as a member of the team. See the Team Memberships API to learn how to add more people to the team.
+Create a Team. Returns Team object. The authenticated user is automatically added as a member of the team. See the Team Memberships API to learn how to add more people to the team.
 
 **Example queryObject:**
 
@@ -380,9 +340,7 @@ Creates a team. The authenticated user is automatically added as a member of the
 
 #### teams.getTeam(queryObject)
 
-[get] https://api.ciscospark.com/v1/teams/{teamId}
-
-Shows details for a team, by ID. Specify the room ID in the teamId parameter in the URI.
+Get Team by ID. Returns Team object.
 
 **Example queryObject:**
 
@@ -394,9 +352,7 @@ Shows details for a team, by ID. Specify the room ID in the teamId parameter in 
 
 #### teams.updateTeam(queryObject)
 
-[put] https://api.ciscospark.com/v1/teams/{teamId}
-
-Updates details for a team, by ID. Specify the team ID in the teamId parameter in the URI.
+Update a Team by ID. Returns Team object.
 
 **Example queryObject:**
 
@@ -411,9 +367,7 @@ Updates details for a team, by ID. Specify the team ID in the teamId parameter i
 
 #### teams.deleteTeam(queryObject)
 
-[delete] https://api.ciscospark.com/v1/teams/{teamId}
-
-Deletes a team, by ID. Specify the team ID in the teamId parameter in the URI.
+Delete a team by ID.
 
 **Example queryObject:**
 
@@ -429,9 +383,7 @@ Query, Create, Update, and Delete Spark Team Memberships.
 
 #### teamMemberships.getTeamMemberships(queryObject)
 
-[get] https://api.ciscospark.com/v1/team/memberships/
-
-Lists all team memberships. By default, lists memberships for teams to which the authenticated user belongs. Use query parameters to filter the response. Use teamId to list memberships for a team, by ID.
+Get Team Memberships by ID. Returns array of TeamMembership objects. If Team ID is not specified, lists memberships for teams to which the authenticated user belongs.
 
 **Example queryObject:**
 
@@ -443,9 +395,7 @@ Lists all team memberships. By default, lists memberships for teams to which the
 
 #### teamMemberships.createTeamMembership(queryObject)
 
-[post] https://api.ciscospark.com/v1/team/memberships/
-
-Add someone to a team by Person ID or email address; optionally making them a moderator.
+Create a Team Membership by Person ID or email address. Returns TeamMembership object. Optionally make membership a moderator.
 
 **Example queryObject:**
 
@@ -462,9 +412,7 @@ Add someone to a team by Person ID or email address; optionally making them a mo
 
 #### teamMemberships.getTeamMembership(queryObject)
 
-[get] https://api.ciscospark.com/v1/team/memberships/{membershipId}
-
-Get details for a membership by ID. Specify the membership ID in the membershipId URI parameter.
+Get Team Memberships. Returns TeamMembership object.
 
 **Example queryObject:**
 
@@ -476,9 +424,7 @@ Get details for a membership by ID. Specify the membership ID in the membershipI
 
 #### teamMemberships.updateTeamMembership(queryObject)
 
-[put] https://api.ciscospark.com/v1/team/memberships/{membershipId}
-
-Updates properties for a membership by ID. Specify the membership ID in the membershipId URI parameter.
+UUpdate a Team Membership by ID. Returns TeamMembership object.
 
 **Example queryObject:**
 
@@ -493,9 +439,7 @@ Updates properties for a membership by ID. Specify the membership ID in the memb
 
 #### teamMemberships.deleteTeamMembership(queryObject)
 
-[delete] https://api.ciscospark.com/v1/team/memberships/{membershipId}
-
-Deletes a membership by ID. Specify the membership ID in the membershipId URI parameter.
+Delete a Team Membership by ID.
 
 **Example queryObject:**
 
@@ -511,9 +455,7 @@ Query, Create, Update, and Delete Spark Webhooks.
 
 #### webhooks.getWebhooks(queryObject)
 
-[get] https://api.ciscospark.com/v1/webhooks/
-
-Lists all of your webhooks.
+Get Webhooks. Returns an array of Webhook objects.
 
 **Example queryObject:**
 
@@ -523,9 +465,7 @@ Lists all of your webhooks.
 
 #### webhooks.createWebhook(queryObject)
 
-[post] https://api.ciscospark.com/v1/webhooks/
-
-Creates a webhook.
+Create a webhook. Returns a Webhook object.
 
 **Example queryObject:**
 
@@ -544,9 +484,7 @@ Creates a webhook.
 
 #### webhooks.getWebhook(queryObject)
 
-[get] https://api.ciscospark.com/v1/webhooks/{webhookId}
-
-Shows details for a webhook, by ID. Specify the webhook ID in the webhookId parameter in the URI.
+Get Webhook by ID. Returns a Webhook object.
 
 **Example queryObject:**
 
@@ -558,9 +496,7 @@ Shows details for a webhook, by ID. Specify the webhook ID in the webhookId para
 
 #### webhooks.updateWebhook(queryObject)
 
-[put] https://api.ciscospark.com/v1/webhooks/{webhookId}
-
-Updates a webhook, by ID. Specify the webhook ID in the webhookId parameter in the URI.
+Update a webhook by ID. Returns a Webhook object.
 
 **Example queryObject:**
 
@@ -576,9 +512,7 @@ Updates a webhook, by ID. Specify the webhook ID in the webhookId parameter in t
 
 #### webhooks.deleteWebhook(queryObject)
 
-[delete] https://api.ciscospark.com/v1/webhooks/{webhookId}
-
-Deletes a webhook, by ID. Specify the webhook ID in the webhookId parameter in the URI.
+Delete a Webhook by ID.
 
 **Example queryObject:**
 
@@ -594,9 +528,7 @@ Query Organizations
 
 #### organizations.getOrganizations(queryObject)
 
-[get] https://api.ciscospark.com/v1/organizations/
-
-Lists all of your visible Organizations.
+Get Organizations for authenticated User. Returns array of Organization objects.
 
 **Example queryObject:**
 
@@ -606,9 +538,7 @@ Lists all of your visible Organizations.
 
 #### organizations.getOrganization(queryObject)
 
-[get] https://api.ciscospark.com/v1/organizations/{orgId}
-
-Shows details for a organization, by ID. Specify the organization ID in the orgId parameter in the URI.
+Get Organization by ID. Returns Organization object.
 
 **Example queryObject:**
 
@@ -624,9 +554,7 @@ Query Licenses
 
 #### licenses.getLicenses(queryObject)
 
-[get] https://api.ciscospark.com/v1/licenses/
-
-Lists all of your visible Licenses.
+Get Licenses. Returns array of License objects.
 
 **Example queryObject:**
 
@@ -636,9 +564,7 @@ Lists all of your visible Licenses.
 
 #### licenses.getLicense(queryObject)
 
-[get] https://api.ciscospark.com/v1/licenses/{licenseId}
-
-Shows details for a license, by ID. Specify the license ID in the licenseId parameter in the URI.
+Get License by ID. Returns License object.
 
 **Example queryObject:**
 
@@ -654,9 +580,7 @@ Query Roles
 
 #### roles.getRoles(queryObject)
 
-[get] https://api.ciscospark.com/v1/roles/
-
-Lists all of your visible Roles.
+Get Roles. Returns an array of Role objects.
 
 **Example queryObject:**
 
@@ -666,9 +590,7 @@ Lists all of your visible Roles.
 
 #### roles.getRole(queryObject)
 
-[get] https://api.ciscospark.com/v1/roles/{roleId}
-
-Shows details for a role, by ID. Specify the role ID in the roleId parameter in the URI.
+Get Role by ID. Returns Role object.
 
 **Example queryObject:**
 
@@ -684,9 +606,7 @@ Retrieve Files
 
 #### contents.getContent(queryObject)
 
-[get] https://api.ciscospark.com/v1/contents/{contentId}
-
-Retrieve the contents of a file by content ID.
+Get File contents by ID. Returns binary of file.
 
 **Example queryObject:**
 
@@ -695,5 +615,115 @@ Retrieve the contents of a file by content ID.
   "contentId": "contentId string"
 }
 ```
+
+## API Models
+
+#### Person
+
+- `id` : **[string]** Person ID
+- `emails` : **[array]** Person email array
+- `displayName` : **[string]** Person display name
+- `avatar` : **[string]** Person avatar URL
+- `created` : **[string]** Person creation date/time
+- `timeZone` : **[string]** Person time zone
+
+
+#### Room
+
+- `id` : **[string]** Room ID
+- `title` : **[string]** Room title
+- `type` : **[string]** Room type
+- `isLocked` : **[boolean]** Room is moderated
+- `teamId` : **[string]** Room Team ID
+- `creatorId` : **[string]** Room creator ID
+- `lastActivity` : **[string]** Room last activity date/time
+- `created` : **[string]** Room creation date/time
+
+
+#### Membership
+
+- `id` : **[string]** Membership ID
+- `roomId` : **[string]** Room ID
+- `personId` : **[string]** Person ID
+- `personEmail` : **[string]** Person email
+- `personDisplayName` : **[string]** Person display name
+- `isModerator` : **[boolean]** Membership is moderator
+- `isMonitor` : **[boolean]** Membership is monitor
+- `created` : **[string]** Membership creation date/time
+
+
+#### Message
+
+- `id` : **[string]** Message ID
+- `roomId` : **[string]** Room ID
+- `roomType` : **[string]** Room type
+- `toPersonId` : **[string]** Person ID (for type=direct)
+- `toPersonEmail` : **[string]** Person email (for type=direct)
+- `text` : **[string]** Message in plain text format
+- `markdown` : **[string]** Message in markdown format
+- `html` : **[string]** Message in html format
+- `files` : **[array]** File URL array
+- `personId` : **[string]** Person ID
+- `personEmail` : **[string]** Person Email
+- `created` : **[string]** Message creation date/time
+- `mentionedPeople` : **[array]** Person ID array
+
+
+#### Team
+
+- `id` : **[string]** Team ID
+- `name` : **[string]** Team Name
+- `creatorId` : **[string]** Team creator ID
+- `created` : **[string]** Team creation date/time
+
+
+#### TeamMembership
+
+- `id` : **[string]** Team Membership ID
+- `teamId` : **[string]** Team ID
+- `personId` : **[string]** Person ID
+- `personEmail` : **[string]** Person email
+- `personDisplayName` : **[string]** Person display name
+- `isModerator` : **[boolean]** Team Membership is moderator
+- `created` : **[string]** Team Membership creation date/time
+
+
+#### Webhook
+
+- `id` : **[string]** Webhook ID
+- `name` : **[string]** Webhook name
+- `targetUrl` : **[string]** Webhook target URL
+- `resource` : **[string]** Webhook resource
+- `event` : **[string]** Webhook event
+- `orgId` : **[string]** Webhook organization ID
+- `createdBy` : **[string]** Webhook created by Person ID
+- `appId` : **[string]** Webhook application ID
+- `ownedBy` : **[string]** Webhook owner Person ID
+- `filter` : **[string]** Webhook filter
+- `status` : **[string]** Webhook status
+- `secret` : **[string]** Webhook secret
+- `created` : **[string]** Webhook creation date/time
+
+
+#### Organization
+
+- `id` : **[string]** Organization ID
+- `displayName` : **[string]** Organization Display Name
+- `created` : **[string]** Organization creation date/time
+
+
+#### License
+
+- `id` : **[string]** License ID
+- `displayName` : **[string]** License Display Name
+- `totalUnits` : **[string]** License quantity total
+- `consumedUnits` : **[string]** License quantity consumed
+
+
+#### Role
+
+- `id` : **[string]** Role ID
+- `displayName` : **[string]** Role Display Name
+
 
 
