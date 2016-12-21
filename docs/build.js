@@ -33,7 +33,6 @@ var subtitle = '#### ';
 var version = 'File version v';
 var intro = '';
 var resources = {};
-var modesl = {};
 var swaggerApiBase = '';
 
 var processedSpec = getSpec(swaggerDef)
