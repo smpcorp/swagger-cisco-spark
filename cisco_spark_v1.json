@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "title": "Spark API",
-        "version": "1.2.2",
+        "version": "1.2.3",
         "description": "Cisco Spark API version 1 Swagger Definition File."
     },
     "externalDocs": {
@@ -1458,6 +1458,15 @@
                 "timeZone": {
                     "type": "string",
                     "description": "Person time zone"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Person presence status (active or inactive)"
+                },
+                "lastActivity": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Person last active date/time"
                 }
             }
         },

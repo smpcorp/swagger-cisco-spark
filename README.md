@@ -2,7 +2,7 @@
 
 #### Cisco Spark API version 1 Swagger Definition File.
 
-File version v1.2.2
+File version v1.2.3
 
 *Note: This is a generated README file. For details on the data types in the examples, reference the developer docs [here](https://developer.ciscospark.com).*
 
@@ -626,6 +626,8 @@ Get File contents by ID. Returns binary of file.
 - `avatar` : **[string]** Person avatar URL
 - `created` : **[string]** Person creation date/time
 - `timeZone` : **[string]** Person time zone
+- `status` : **[string]** Person presence status (active or inactive)
+- `lastActivity` : **[string]** Person last active date/time
 
 
 #### Room
@@ -724,6 +726,3 @@ Get File contents by ID. Returns binary of file.
 
 - `id` : **[string]** Role ID
 - `displayName` : **[string]** Role Display Name
-
-
-
