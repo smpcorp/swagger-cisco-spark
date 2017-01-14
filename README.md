@@ -2,7 +2,7 @@
 
 #### Cisco Spark API version 1 Swagger Definition File.
 
-File version v1.2.4
+File version v1.2.5
 
 *Note: This is a generated README file. For details on the data types in the examples, reference the developer docs [here](https://developer.ciscospark.com).*
 
@@ -524,7 +524,7 @@ Delete a Webhook by ID.
 
 ### Organizations
 
-Query Organizations
+Query Organizations.
 
 #### organizations.getOrganizations(queryObject)
 
@@ -550,7 +550,7 @@ Get Organization by ID. Returns Organization object.
 
 ### Licenses
 
-Query Licenses
+Query Licenses.
 
 #### licenses.getLicenses(queryObject)
 
@@ -576,7 +576,7 @@ Get License by ID. Returns License object.
 
 ### Roles
 
-Query Roles
+Query Roles.
 
 #### roles.getRoles(queryObject)
 
@@ -602,7 +602,7 @@ Get Role by ID. Returns Role object.
 
 ### Contents
 
-Retrieve Files
+Retrieve Files.
 
 #### contents.getContent(queryObject)
 
@@ -620,112 +620,119 @@ Get File contents by ID. Returns binary of file.
 
 #### Person
 
-- `id` : **[string]** Person ID
-- `emails` : **[array]** Person email array
-- `displayName` : **[string]** Person display name
-- `avatar` : **[string]** Person avatar URL
-- `created` : **[string]** Person creation date/time
-- `timeZone` : **[string]** Person time zone
-- `status` : **[string]** Person presence status (active or inactive)
-- `lastActivity` : **[string]** Person last active date/time
+- `id` : **[string]** Person ID.
+- `emails` : **[array]** Person email array.
+- `displayName` : **[string]** Person display name.
+- `nickName` : **[string]** Person nickname.
+- `firstName` : **[string]** Person first name.
+- `lastName` : **[string]** Person last name.
+- `avatar` : **[string]** Person avatar URL.
+- `orgId` : **[string]** Person organization ID.
+- `roles` : **[array]** Person roles.
+- `licenses` : **[array]** Person licenses.
+- `created` : **[string]** Person creation date/time.
+- `timeZone` : **[string]** Person time zone.
+- `lastActivity` : **[string]** Person last active date/time.
+- `status` : **[string]** Person presence status (active or inactive).
+- `type` : **[string]** Person type (person or bot).
 
 
 #### Room
 
-- `id` : **[string]** Room ID
-- `title` : **[string]** Room title
-- `type` : **[string]** Room type
-- `isLocked` : **[boolean]** Room is moderated
-- `teamId` : **[string]** Room Team ID
-- `creatorId` : **[string]** Room creator ID
-- `lastActivity` : **[string]** Room last activity date/time
-- `created` : **[string]** Room creation date/time
+- `id` : **[string]** Room ID.
+- `title` : **[string]** Room title.
+- `type` : **[string]** Room type (group or direct).
+- `isLocked` : **[boolean]** Room is moderated.
+- `teamId` : **[string]** Room Team ID.
+- `creatorId` : **[string]** Room creator Person ID.
+- `lastActivity` : **[string]** Room last activity date/time.
+- `created` : **[string]** Room creation date/time.
 
 
 #### Membership
 
-- `id` : **[string]** Membership ID
-- `roomId` : **[string]** Room ID
-- `personId` : **[string]** Person ID
-- `personEmail` : **[string]** Person email
-- `personDisplayName` : **[string]** Person display name
-- `isModerator` : **[boolean]** Membership is moderator
-- `isMonitor` : **[boolean]** Membership is monitor
-- `created` : **[string]** Membership creation date/time
+- `id` : **[string]** Membership ID.
+- `roomId` : **[string]** Room ID.
+- `personId` : **[string]** Person ID.
+- `personEmail` : **[string]** Person email.
+- `personDisplayName` : **[string]** Person display name.
+- `isModerator` : **[boolean]** Membership is moderator.
+- `isMonitor` : **[boolean]** Membership is monitor.
+- `created` : **[string]** Membership creation date/time.
 
 
 #### Message
 
-- `id` : **[string]** Message ID
-- `roomId` : **[string]** Room ID
-- `roomType` : **[string]** Room type
-- `toPersonId` : **[string]** Person ID (for type=direct)
-- `toPersonEmail` : **[string]** Person email (for type=direct)
-- `text` : **[string]** Message in plain text format
-- `markdown` : **[string]** Message in markdown format
-- `html` : **[string]** Message in html format
-- `files` : **[array]** File URL array
-- `personId` : **[string]** Person ID
-- `personEmail` : **[string]** Person Email
-- `created` : **[string]** Message creation date/time
-- `mentionedPeople` : **[array]** Person ID array
+- `id` : **[string]** Message ID.
+- `roomId` : **[string]** Room ID.
+- `roomType` : **[string]** Room type (group or direct).
+- `toPersonId` : **[string]** Person ID (for type=direct).
+- `toPersonEmail` : **[string]** Person email (for type=direct).
+- `text` : **[string]** Message in plain text format.
+- `markdown` : **[string]** Message in markdown format.
+- `html` : **[string]** Message in html format.
+- `files` : **[array]** File URL array.
+- `personId` : **[string]** Person ID.
+- `personEmail` : **[string]** Person Email.
+- `created` : **[string]** Message creation date/time.
+- `mentionedPeople` : **[array]** Person ID array.
 
 
 #### Team
 
-- `id` : **[string]** Team ID
-- `name` : **[string]** Team Name
-- `creatorId` : **[string]** Team creator ID
-- `created` : **[string]** Team creation date/time
+- `id` : **[string]** Team ID.
+- `name` : **[string]** Team Name.
+- `creatorId` : **[string]** Team creator ID.
+- `created` : **[string]** Team creation date/time.
 
 
 #### TeamMembership
 
-- `id` : **[string]** Team Membership ID
-- `teamId` : **[string]** Team ID
-- `personId` : **[string]** Person ID
-- `personEmail` : **[string]** Person email
-- `personDisplayName` : **[string]** Person display name
-- `isModerator` : **[boolean]** Team Membership is moderator
-- `created` : **[string]** Team Membership creation date/time
+- `id` : **[string]** Team Membership ID.
+- `teamId` : **[string]** Team ID.
+- `personId` : **[string]** Person ID.
+- `personEmail` : **[string]** Person email.
+- `personDisplayName` : **[string]** Person display name.
+- `isModerator` : **[boolean]** Team Membership is moderator.
+- `created` : **[string]** Team Membership creation date/time.
 
 
 #### Webhook
 
-- `id` : **[string]** Webhook ID
-- `name` : **[string]** Webhook name
-- `targetUrl` : **[string]** Webhook target URL
-- `resource` : **[string]** Webhook resource
-- `event` : **[string]** Webhook event
-- `orgId` : **[string]** Webhook organization ID
-- `createdBy` : **[string]** Webhook created by Person ID
-- `appId` : **[string]** Webhook application ID
-- `ownedBy` : **[string]** Webhook owner Person ID
-- `filter` : **[string]** Webhook filter
-- `status` : **[string]** Webhook status
-- `secret` : **[string]** Webhook secret
-- `created` : **[string]** Webhook creation date/time
+- `id` : **[string]** Webhook ID.
+- `name` : **[string]** Webhook name.
+- `targetUrl` : **[string]** Webhook target URL.
+- `resource` : **[string]** Webhook resource.
+- `event` : **[string]** Webhook event.
+- `orgId` : **[string]** Webhook organization ID.
+- `createdBy` : **[string]** Webhook created by Person ID.
+- `appId` : **[string]** Webhook application ID.
+- `ownedBy` : **[string]** Webhook owner Person ID.
+- `filter` : **[string]** Webhook filter.
+- `status` : **[string]** Webhook status.
+- `secret` : **[string]** Webhook secret.
+- `created` : **[string]** Webhook creation date/time.
 
 
 #### Organization
 
-- `id` : **[string]** Organization ID
-- `displayName` : **[string]** Organization Display Name
-- `created` : **[string]** Organization creation date/time
+- `id` : **[string]** Organization ID.
+- `displayName` : **[string]** Organization Display Name.
+- `created` : **[string]** Organization creation date/time.
 
 
 #### License
 
-- `id` : **[string]** License ID
-- `displayName` : **[string]** License Display Name
-- `totalUnits` : **[string]** License quantity total
-- `consumedUnits` : **[string]** License quantity consumed
+- `id` : **[string]** License ID.
+- `name` : **[string]** License Display Name.
+- `totalUnits` : **[string]** License quantity total.
+- `consumedUnits` : **[string]** License quantity consumed.
 
 
 #### Role
 
-- `id` : **[string]** Role ID
-- `displayName` : **[string]** Role Display Name
+- `id` : **[string]** Role ID.
+- `name` : **[string]** Role Display Name.
 
 
 

@@ -1,8 +1,9 @@
 swagger: '2.0'
 info:
   title: Spark API
-  version: "1.2.4"
+  version: "1.2.5"
   description: Cisco Spark API version 1 Swagger Definition File.
+  termsOfService: https://developer.ciscospark.com/tos.html
 externalDocs:
   url: https://developer.ciscospark.com
 host: api.ciscospark.com
@@ -36,13 +37,13 @@ tags:
   - name: webhooks
     description: Query, Create, Update, and Delete Spark Webhooks.
   - name: organizations
-    description: Query Organizations
+    description: Query Organizations.
   - name: licenses
-    description: Query Licenses
+    description: Query Licenses.
   - name: roles
-    description: Query Roles
+    description: Query Roles.
   - name: contents
-    description: Retrieve Files
+    description: Retrieve Files.
 paths:
   /people/:
     get:
@@ -54,13 +55,13 @@ paths:
       parameters:
         - name: email
           in: query
-          description: Email address
+          description: Email address.
           required: false
           type: string
           format: email
         - name: displayName
           in: query
-          description: Person display name
+          description: Person display name.
           required: false
           type: string
         - $ref: '#/parameters/Max'
@@ -84,34 +85,34 @@ paths:
               - displayName
             properties:
               emails:
-                  description: Array of emails
+                  description: Array of emails.
                   type: array
                   items:
                     type: string
                     format: email
               displayName:
-                description: Person display name
+                description: Person display name.
                 type: string
               firstName:
-                description: Person first name
+                description: Person first name.
                 type: string
               lastName:
-                description: Person last name
+                description: Person last name.
                 type: string
               avatar:
-                description: Person avatar URL
+                description: Person avatar URL.
                 type: string
                 format: url
               orgId:
-                description: Organization ID of Person
+                description: Organization ID of Person.
                 type: string
               roles:
-                description: Array of Role IDs
+                description: Array of Role IDs.
                 type: array
                 items:
                   type: string
               licenses:
-                description: Array of License IDs
+                description: Array of License IDs.
                 type: array
                 items:
                   type: string
@@ -128,7 +129,7 @@ paths:
       parameters:
         - name: personId
           in: path
-          description: Person ID
+          description: Person ID.
           required: true
           type: string
       responses:
@@ -143,7 +144,7 @@ paths:
       parameters:
         - name: personId
           in: path
-          description: Person ID
+          description: Person ID.
           required: true
           type: string
         - name: body
@@ -159,34 +160,34 @@ paths:
               - licenses
             properties:
               emails:
-                description: Array of emails
+                description: Array of emails.
                 type: array
                 items:
                   type: string
                   format: email
               displayName:
-                description: Person display name
+                description: Person display name.
                 type: string
               firstName:
-                description: Person first name
+                description: Person first name.
                 type: string
               lastName:
-                description: Person last name
+                description: Person last name.
                 type: string
               avatar:
-                description: URL of Person avatar
+                description: URL of Person avatar.
                 type: string
                 format: url
               orgId:
-                description: Organization ID of Person
+                description: Organization ID of Person.
                 type: string
               roles:
-                description: Array of Role IDs of Person
+                description: Array of Role IDs of Person.
                 type: array
                 items:
                   type: string
               licenses:
-                description: Array of License IDs of Person
+                description: Array of License IDs of Person.
                 type: array
                 items:
                   type: string
@@ -202,12 +203,12 @@ paths:
       parameters:
         - name: personId
           in: path
-          description: Person ID
+          description: Person ID.
           required: true
           type: string
       responses:
         204:
-          description: Successful response
+          description: Successful response.
   /people/me:
     get:
       operationId: getMe
@@ -228,12 +229,12 @@ paths:
       parameters:
         - name: teamId
           in: query
-          description: Team ID
+          description: Team ID.
           required: false
           type: string
         - name: type
           in: query
-          description: Room type
+          description: Room type.
           required: false
           type: string
           pattern: '(group|direct)'
@@ -257,10 +258,10 @@ paths:
               - title
             properties:
               title:
-                description: Room title
+                description: Room title.
                 type: string
               teamId:
-                description: Room Team ID
+                description: Room Team ID.
                 type: string
       responses:
         200:
@@ -275,7 +276,7 @@ paths:
       parameters:
         - name: roomId
           in: path
-          description: Room ID
+          description: Room ID.
           required: true
           type: string
       responses:
@@ -290,7 +291,7 @@ paths:
       parameters:
         - name: roomId
           in: path
-          description: Room ID
+          description: Room ID.
           required: true
           type: string
         - name: body
@@ -302,7 +303,7 @@ paths:
               - title
             properties:
               title:
-                description: Room title
+                description: Room title.
                 type: string
       responses:
         200:
@@ -316,7 +317,7 @@ paths:
       parameters:
         - name: roomId
           in: path
-          description: Room ID
+          description: Room ID.
           required: true
           type: string
       responses:
@@ -332,17 +333,17 @@ paths:
       parameters:
         - name: roomId
           in: query
-          description: Room ID
+          description: Room ID.
           required: false
           type: string
         - name: personId
           in: query
-          description: Person ID
+          description: Person ID.
           required: false
           type: string
         - name: personEmail
           in: query
-          description: Person email
+          description: Person email.
           required: false
           type: string
           format: email
@@ -366,17 +367,17 @@ paths:
               - roomId
             properties:
               roomId:
-                description: Room ID
+                description: Room ID.
                 type: string
               personId:
-                description: Person ID
+                description: Person ID.
                 type: string
               personEmail:
-                description: Person email
+                description: Person email.
                 type: string
                 format: email
               isModerator:
-                description: Membership is a moderator
+                description: Membership is a moderator.
                 type: boolean
       responses:
         200:
@@ -391,7 +392,7 @@ paths:
       parameters:
         - name: membershipId
           in: path
-          description: Membership ID
+          description: Membership ID.
           required: true
           type: string
       responses:
@@ -406,7 +407,7 @@ paths:
       parameters:
         - name: membershipId
           in: path
-          description: Membership ID
+          description: Membership ID.
           required: true
           type: string
         - name: body
@@ -418,7 +419,7 @@ paths:
               - isModerator
             properties:
               isModerator:
-                description: Membership is a moderator
+                description: Membership is a moderator.
                 type: boolean
       responses:
         200:
@@ -432,12 +433,12 @@ paths:
       parameters:
         - name: membershipId
           in: path
-          description: Membership ID
+          description: Membership ID.
           required: true
           type: string
       responses:
         204:
-          description: Successful response
+          description: Successful response.
   /messages/:
     get:
       operationId: getMessages
@@ -448,23 +449,23 @@ paths:
       parameters:
         - name: roomId
           in: query
-          description: Room ID
+          description: Room ID.
           required: true
           type: string
         - name: mentionedPeople
           in: query
-          description: Person ID
+          description: Person ID.
           required: false
           type: string
         - name: before
           in: query
-          description: Marker date/time
+          description: Marker date/time.
           required: false
           type: string
           format: date-time
         - name: beforeMessage
           in: query
-          description: Marker Message ID
+          description: Marker Message ID.
           required: false
           type: string
         - $ref: '#/parameters/Max'
@@ -485,26 +486,26 @@ paths:
             type: object
             properties:
               roomId:
-                description: Room ID
+                description: Room ID.
                 type: string
               toPersonId:
-                description: Person ID
+                description: Person ID.
                 type: string
               toPersonEmail:
-                description: Person Email
+                description: Person Email.
                 type: string
                 format: email
               text:
-                description: Message as plain text
+                description: Message as plain text.
                 type: string
               markdown:
-                description: Message as markdown
+                description: Message as markdown.
                 type: string
               html:
-                description: Message as html
+                description: Message as html.
                 type: string
               files:
-                description: File URL
+                description: File URL.
                 type: string
                 format: url
       responses:
@@ -520,7 +521,7 @@ paths:
       parameters:
         - name: messageId
           in: path
-          description: Message ID
+          description: Message ID.
           required: true
           type: string
       responses:
@@ -535,12 +536,12 @@ paths:
       parameters:
         - name: messageId
           in: path
-          description: Message ID
+          description: Message ID.
           required: true
           type: string
       responses:
         204:
-          description: Successful response
+          description: Successful response.
   /teams/:
     get:
       operationId: getTeams
@@ -569,7 +570,7 @@ paths:
               - name
             properties:
               name:
-                description: Team name
+                description: Team name.
                 type: string
       responses:
         200:
@@ -584,7 +585,7 @@ paths:
       parameters:
         - name: teamId
           in: path
-          description: Team ID
+          description: Team ID.
           required: true
           type: string
       responses:
@@ -599,7 +600,7 @@ paths:
       parameters:
         - name: teamId
           in: path
-          description: Team ID
+          description: Team ID.
           required: true
           type: string
         - name: body
@@ -611,7 +612,7 @@ paths:
               - name
             properties:
               name:
-                description: Team name
+                description: Team name.
                 type: string
       responses:
         200:
@@ -625,12 +626,12 @@ paths:
       parameters:
         - name: teamId
           in: path
-          description: Team ID
+          description: Team ID.
           required: true
           type: string
       responses:
         204:
-          description: Successful response
+          description: Successful response.
   /team/memberships/:
     get:
       operationId: getTeamMemberships
@@ -641,7 +642,7 @@ paths:
       parameters:
         - name: teamId
           in: query
-          description: Team ID
+          description: Team ID.
           required: true
           type: string
         - $ref: '#/parameters/Max'
@@ -664,17 +665,17 @@ paths:
               - teamId
             properties:
               teamId:
-                description: Team ID
+                description: Team ID.
                 type: string
               personId:
-                description: Person ID
+                description: Person ID.
                 type: string
               personEmail:
-                description: Person Email
+                description: Person Email.
                 type: string
                 format: email
               isModerator:
-                description: Team Membership is a moderator
+                description: Team Membership is a moderator.
                 type: boolean
       responses:
         200:
@@ -689,7 +690,7 @@ paths:
       parameters:
         - name: membershipId
           in: path
-          description: Membership ID
+          description: Membership ID.
           required: true
           type: string
       responses:
@@ -704,7 +705,7 @@ paths:
       parameters:
         - name: membershipId
           in: path
-          description: Membership ID
+          description: Membership ID.
           required: true
           type: string
         - name: body
@@ -716,7 +717,7 @@ paths:
               - isModerator
             properties:
               isModerator:
-                description: Team Membership is a moderator
+                description: Team Membership is a moderator.
                 type: boolean
       responses:
         200:
@@ -730,12 +731,12 @@ paths:
       parameters:
         - name: membershipId
           in: path
-          description: Membership ID
+          description: Membership ID.
           required: true
           type: string
       responses:
         204:
-          description: Successful response
+          description: Successful response.
   /webhooks/:
     get:
       operationId: getWebhooks
@@ -767,23 +768,23 @@ paths:
               - event
             properties:
               name:
-                description: Webhook name
+                description: Webhook name.
                 type: string
               targetUrl:
-                description: Webhook target URL
+                description: Webhook target URL.
                 type: string
                 format: url
               resource:
-                description: Webhook resource
+                description: Webhook resource.
                 type: string
               event:
-                description: Webhook event
+                description: Webhook event.
                 type: string
               filter:
-                description: Webhook filter
+                description: Webhook filter.
                 type: string
               secret:
-                description: Webhook secret
+                description: Webhook secret.
                 type: string
       responses:
         200:
@@ -798,7 +799,7 @@ paths:
       parameters:
         - name: webhookId
           in: path
-          description: Webhook ID
+          description: Webhook ID.
           required: true
           type: string
       responses:
@@ -813,7 +814,7 @@ paths:
       parameters:
         - name: webhookId
           in: path
-          description: Webhook ID
+          description: Webhook ID.
           required: true
           type: string
         - name: body
@@ -826,10 +827,10 @@ paths:
               - targetUrl
             properties:
               name:
-                description: Webhook name
+                description: Webhook name.
                 type: string
               targetUrl:
-                description: Webhook target URL
+                description: Webhook target URL.
                 type: string
                 format: url
       responses:
@@ -844,12 +845,12 @@ paths:
       parameters:
         - name: webhookId
           in: path
-          description: Webhook ID
+          description: Webhook ID.
           required: true
           type: string
       responses:
         204:
-          description: Successful response
+          description: Successful response.
   /organizations/:
     get:
       operationId: getOrganizations
@@ -872,7 +873,7 @@ paths:
       parameters:
         - name: orgId
           in: path
-          description: Organization ID
+          description: Organization ID.
           required: true
           type: string
       responses:
@@ -900,7 +901,7 @@ paths:
       parameters:
         - name: licenseId
           in: path
-          description: License ID
+          description: License ID.
           required: true
           type: string
       responses:
@@ -928,7 +929,7 @@ paths:
       parameters:
         - name: roleId
           in: path
-          description: Role ID
+          description: Role ID.
           required: true
           type: string
       responses:
@@ -944,7 +945,7 @@ paths:
       parameters:
         - name: contentId
           in: path
-          description: Content ID
+          description: Content ID.
           required: true
           type: string
       responses:
@@ -956,277 +957,304 @@ definitions:
     properties:
       id:
         type: string
-        description: Person ID
+        description: Person ID.
       emails:
         type: array
-        description: Person email array
+        description: Person email array.
         items:
           type: string
           format: email
-          description: Person email
+          description: Person email.
       displayName:
         type: string
-        description: Person display name
+        description: Person display name.
+      nickName:
+        type: string
+        description: Person nickname.
+      firstName:
+        type: string
+        description: Person first name.
+      lastName:
+        type: string
+        description: Person last name.
       avatar:
         type: string
         format: url
-        description: Person avatar URL
+        description: Person avatar URL.
+      orgId:
+        type: string
+        description: Person organization ID.
+      roles:
+        type: array
+        description: Person roles.
+        items:
+          type: string
+          description: Role ID.
+      licenses:
+        type: array
+        description: Person licenses.
+        items:
+          type: string
+          description: License ID.
       created:
         type: string
         format: date-time
-        description: Person creation date/time
+        description: Person creation date/time.
       timeZone:
         type: string
-        description: Person time zone
-      status:
-        type: string
-        description: Person presence status (active or inactive)
+        description: Person time zone.
       lastActivity:
         type: string
         format: date-time
-        description: Person last active date/time
+        description: Person last active date/time.
+      status:
+        type: string
+        description: Person presence status (active or inactive).
+      type:
+        type: string
+        description: Person type (person or bot).
   Room:
     type: object
     properties:
       id:
         type: string
-        description: Room ID
+        description: Room ID.
       title:
         type: string
-        description: Room title
+        description: Room title.
       type:
         type: string
-        description: Room type
+        description: Room type (group or direct).
       isLocked:
         type: boolean
-        description: Room is moderated
+        description: Room is moderated.
       teamId:
         type: string
-        description: Room Team ID
+        description: Room Team ID.
       creatorId:
         type: string
-        description: Room creator ID
+        description: Room creator Person ID.
       lastActivity:
         type: string
         format: date-time
-        description: Room last activity date/time
+        description: Room last activity date/time.
       created:
         type: string
         format: date-time
-        description: Room creation date/time
+        description: Room creation date/time.
   Membership:
     type: object
     properties:
       id:
         type: string
-        description: Membership ID
+        description: Membership ID.
       roomId:
         type: string
-        description: Room ID
+        description: Room ID.
       personId:
         type: string
-        description: Person ID
+        description: Person ID.
       personEmail:
         type: string
         format: email
-        description: Person email
+        description: Person email.
       personDisplayName:
         type: string
-        description: Person display name
+        description: Person display name.
       isModerator:
         type: boolean
-        description: Membership is moderator
+        description: Membership is moderator.
       isMonitor:
         type: boolean
-        description: Membership is monitor
+        description: Membership is monitor.
       created:
         type: string
         format: date-time
-        description: Membership creation date/time
+        description: Membership creation date/time.
   Message:
     type: object
     properties:
       id:
         type: string
-        description: Message ID
+        description: Message ID.
       roomId:
         type: string
-        description: Room ID
+        description: Room ID.
       roomType:
         type: string
-        description: Room type
+        description: Room type (group or direct).
       toPersonId:
         type: string
-        description: Person ID (for type=direct)
+        description: Person ID (for type=direct).
       toPersonEmail:
         type: string
         format: email
-        description: Person email (for type=direct)
+        description: Person email (for type=direct).
       text:
         type: string
-        description: Message in plain text format
+        description: Message in plain text format.
       markdown:
         type: string
-        description: Message in markdown format
+        description: Message in markdown format.
       html:
         type: string
-        description: Message in html format
+        description: Message in html format.
       files:
         type: array
-        description: File URL array
+        description: File URL array.
         items:
           type: string
           format: url
-          description: File URL
+          description: File URL.
       personId:
         type: string
-        description: Person ID
+        description: Person ID.
       personEmail:
         type: string
         format: email
-        description: Person Email
+        description: Person Email.
       created:
         type: string
         format: date-time
-        description: Message creation date/time
+        description: Message creation date/time.
       mentionedPeople:
         type: array
-        description: Person ID array
+        description: Person ID array.
         items:
           type: string
-          description: Person ID
+          description: Person ID.
   Team:
     type: object
     properties:
       id:
         type: string
-        description: Team ID
+        description: Team ID.
       name:
         type: string
-        description: Team Name
+        description: Team Name.
       creatorId:
         type: string
-        description: Team creator ID
+        description: Team creator ID.
       created:
         type: string
         format: date-time
-        description: Team creation date/time
+        description: Team creation date/time.
   TeamMembership:
     type: object
     properties:
       id:
         type: string
-        description: Team Membership ID
+        description: Team Membership ID.
       teamId:
         type: string
-        description: Team ID
+        description: Team ID.
       personId:
         type: string
-        description: Person ID
+        description: Person ID.
       personEmail:
         type: string
         format: email
-        description: Person email
+        description: Person email.
       personDisplayName:
         type: string
-        description: Person display name
+        description: Person display name.
       isModerator:
         type: boolean
-        description: Team Membership is moderator
+        description: Team Membership is moderator.
       created:
         type: string
         format: date-time
-        description: Team Membership creation date/time
+        description: Team Membership creation date/time.
   Webhook:
     type: object
     properties:
       id:
         type: string
-        description: Webhook ID
+        description: Webhook ID.
       name:
         type: string
-        description: Webhook name
+        description: Webhook name.
       targetUrl:
         type: string
         format: url
-        description: Webhook target URL
+        description: Webhook target URL.
       resource:
         type: string
-        description: Webhook resource
+        description: Webhook resource.
         pattern: '(all|messages|memberships|rooms)'
       event:
         type: string
-        description: Webhook event
+        description: Webhook event.
         pattern: '(all|created|updated|deleted)'
       orgId:
         type: string
-        description: Webhook organization ID
+        description: Webhook organization ID.
       createdBy:
         type: string
-        description: Webhook created by Person ID
+        description: Webhook created by Person ID.
       appId:
         type: string
-        description: Webhook application ID
+        description: Webhook application ID.
       ownedBy:
         type: string
-        description: Webhook owner Person ID
+        description: Webhook owner Person ID.
       filter:
         type: string
-        description: Webhook filter
+        description: Webhook filter.
       status:
         type: string
-        description: Webhook status
+        description: Webhook status.
       secret:
         type: string
-        description: Webhook secret
+        description: Webhook secret.
       created:
         type: string
         format: date-time
-        description: Webhook creation date/time
+        description: Webhook creation date/time.
   Organization:
     type: object
     properties:
       id:
         type: string
-        description: Organization ID
+        description: Organization ID.
       displayName:
         type: string
-        description: Organization Display Name
+        description: Organization Display Name.
       created:
         type: string
         format: date-time
-        description: Organization creation date/time
+        description: Organization creation date/time.
   License:
     type: object
     properties:
       id:
         type: string
-        description: License ID
-      displayName:
+        description: License ID.
+      name:
         type: string
-        description: License Display Name
+        description: License Display Name.
       totalUnits:
         type: string
-        description: License quantity total
+        description: License quantity total.
       consumedUnits:
         type: string
-        description: License quantity consumed
+        description: License quantity consumed.
   Role:
     type: object
     properties:
       id:
         type: string
-        description: Role ID
-      displayName:
+        description: Role ID.
+      name:
         type: string
-        description: Role Display Name
+        description: Role Display Name.
 responses:
   Person:
-    description: Successful response
+    description: Successful response.
     schema:
       $ref: '#/definitions/Person'
   People:
-    description: Successful response
+    description: Successful response.
     schema:
       type: object
       properties:
@@ -1235,11 +1263,11 @@ responses:
           items:
             $ref: '#/definitions/Person'
   Room:
-    description: Successful response
+    description: Successful response.
     schema:
       $ref: '#/definitions/Room'
   Rooms:
-    description: Successful response
+    description: Successful response.
     schema:
       type: object
       properties:
@@ -1248,11 +1276,11 @@ responses:
           items:
             $ref: '#/definitions/Room'
   Membership:
-    description: Successful response
+    description: Successful response.
     schema:
       $ref: '#/definitions/Membership'
   Memberships:
-    description: Successful response
+    description: Successful response.
     schema:
       type: object
       properties:
@@ -1261,11 +1289,11 @@ responses:
           items:
             $ref: '#/definitions/Membership'
   Message:
-    description: Successful response
+    description: Successful response.
     schema:
       $ref: '#/definitions/Message'
   Messages:
-    description: Successful response
+    description: Successful response.
     schema:
       type: object
       properties:
@@ -1274,11 +1302,11 @@ responses:
           items:
             $ref: '#/definitions/Message'
   Team:
-    description: Successful response
+    description: Successful response.
     schema:
       $ref: '#/definitions/Team'
   Teams:
-    description: Successful response
+    description: Successful response.
     schema:
       type: object
       properties:
@@ -1287,11 +1315,11 @@ responses:
           items:
             $ref: '#/definitions/Team'
   TeamMembership:
-    description: Successful response
+    description: Successful response.
     schema:
       $ref: '#/definitions/TeamMembership'
   TeamMemberships:
-    description: Successful response
+    description: Successful response.
     schema:
       type: object
       properties:
@@ -1300,11 +1328,11 @@ responses:
           items:
             $ref: '#/definitions/TeamMembership'
   Webhook:
-    description: Successful response
+    description: Successful response.
     schema:
       $ref: '#/definitions/Webhook'
   Webhooks:
-    description: Successful response
+    description: Successful response.
     schema:
       type: object
       properties:
@@ -1313,11 +1341,11 @@ responses:
           items:
             $ref: '#/definitions/Webhook'
   Organization:
-    description: Successful response
+    description: Successful response.
     schema:
       $ref: '#/definitions/Organization'
   Organizations:
-    description: Successful response
+    description: Successful response.
     schema:
       type: object
       properties:
@@ -1326,11 +1354,11 @@ responses:
           items:
             $ref: '#/definitions/Organization'
   License:
-    description: Successful response
+    description: Successful response.
     schema:
       $ref: '#/definitions/License'
   Licenses:
-    description: Successful response
+    description: Successful response.
     schema:
       type: object
       properties:
@@ -1339,11 +1367,11 @@ responses:
           items:
             $ref: '#/definitions/License'
   Role:
-    description: Successful response
+    description: Successful response.
     schema:
       $ref: '#/definitions/Role'
   Roles:
-    description: Successful response
+    description: Successful response.
     schema:
       type: object
       properties:
@@ -1352,12 +1380,12 @@ responses:
           items:
             $ref: '#/definitions/Role'
   Contents:
-    description: Successful response
+    description: Successful response.
 parameters:
   Max:
     name: max
     in: query
-    description: Limit the maximum number results
+    description: Limit the maximum number results.
     required: false
     type: integer
     pattern: '{[0-9]+:[0-9]+}'
