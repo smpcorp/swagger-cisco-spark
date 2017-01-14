@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   title: Spark API
-  version: "1.2.3"
+  version: "1.2.4"
   description: Cisco Spark API version 1 Swagger Definition File.
 externalDocs:
   url: https://developer.ciscospark.com
@@ -14,12 +14,12 @@ produces:
 consumes:
   - application/json
 securityDefinitions:
-  Authorization:
+  Token:
     type: apiKey
     name: Authorization
     in: header
 security:
-  - Authorization: []
+  - Token: []
 tags:
   - name: people
     description: Query, Create, Update, and Delete Spark Users.
