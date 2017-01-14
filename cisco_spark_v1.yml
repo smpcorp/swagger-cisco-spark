@@ -19,6 +19,7 @@ securityDefinitions:
     type: apiKey
     name: Authorization
     in: header
+    description: Swagger Authentication with Bearer Token requires Token to be entered as 'Bearer <token>'.
 security:
   - Token: []
 tags:

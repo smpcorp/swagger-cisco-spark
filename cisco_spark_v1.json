@@ -24,7 +24,8 @@
         "Token": {
             "type": "apiKey",
             "name": "Authorization",
-            "in": "header"
+            "in": "header",
+            "description": "Swagger Authentication with Bearer Token requires Token to be entered as 'Bearer <token>'."
         }
     },
     "security": [
