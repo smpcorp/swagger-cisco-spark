@@ -1,9 +1,0 @@
-{
-  "scripts": {
-    "build": "SWAGGER_JSON=../cisco_spark_v1.json node build.js > ../README.md"
-  },
-  "dependencies": {
-    "lodash": "^4.17.2",
-    "when": "^3.7.7"
-  }
-}
