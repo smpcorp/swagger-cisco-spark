@@ -2,7 +2,7 @@
 
 #### Cisco Spark API version 1 Swagger Definition File.
 
-File version v1.2.5
+File version v1.2.6
 
 *Note: This is a generated README file. For details on the data types in the examples, reference the developer docs [here](https://developer.ciscospark.com).*
 
@@ -20,6 +20,7 @@ Search people by email address or display name. Returns array of Person objects.
 
 ```json
 {
+  "id": "id string",
   "email": "email string",
   "displayName": "displayName string"
 }
@@ -733,6 +734,3 @@ Get File contents by ID. Returns binary of file.
 
 - `id` : **[string]** Role ID.
 - `name` : **[string]** Role Display Name.
-
-
-
