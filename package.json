@@ -4,6 +4,14 @@
   },
   "name": "swagger-cisco-spark",
   "author": "Nick Marus <nick.marus@cumberlandgroupit.com>",
+  "contributors": [
+    {
+      "name": "Jeff Levensailor",
+      "url": "http://github.com/levensailor",
+      "email": "jeff@levensailor.com"
+    }
+  ],
+  "version": "1.0",
   "license": "MIT",
   "devDependencies": {
     "swagme": "https://github.com/cumberlandgroup/swagme/tarball/master"
