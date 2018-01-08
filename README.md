@@ -2,7 +2,7 @@
 
 #### Cisco Spark API version 1 Open API v3.0 Definition File.
 
-File version v1.2.6
+File version v1.3.0
 
 *Note: This is a generated README file. For details on the data types in the examples, reference the developer docs [here](https://developer.ciscospark.com).*
 
