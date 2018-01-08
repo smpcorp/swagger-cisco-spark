@@ -1,6 +1,6 @@
 # Spark API
 
-#### Cisco Spark API version 1 Swagger Definition File.
+#### Cisco Spark API version 1 Open API v3.0 Definition File.
 
 File version v1.2.6
 
