@@ -3,7 +3,7 @@ servers:
   - url: 'https://api.ciscospark.com/v1'
 info:
   title: Spark API
-  version: 1.3.0
+  version: 1.3.1
   description: Cisco Spark API version 1 Open API v3.0 Definition File.
   termsOfService: 'https://developer.ciscospark.com/tos.html'
 externalDocs:
