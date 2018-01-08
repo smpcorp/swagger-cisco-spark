@@ -67,16 +67,6 @@ Update details for a person by ID. Returns Person object. Only an admin can upda
 
 ```json
 {
-  "body": {
-    "emails": ["emails string", "emails string"],
-    "displayName": "displayName string",
-    "firstName": "firstName string",
-    "lastName": "lastName string",
-    "avatar": "avatar string",
-    "orgId": "orgId string",
-    "roles": ["roles string", "roles string"],
-    "licenses": ["licenses string", "licenses string"]
-  },
   "personId": "personId string"
 }
 ```
@@ -155,9 +145,6 @@ Update a Room by ID. Returns Room object.
 
 ```json
 {
-  "body": {
-    "title": "title string"
-  },
   "roomId": "roomId string"
 }
 ```
@@ -229,9 +216,6 @@ Update a Membership by ID. Returns Membership object.
 
 ```json
 {
-  "body": {
-    "isModerator": "true"
-  },
   "membershipId": "membershipId string"
 }
 ```
@@ -359,9 +343,6 @@ Update a Team by ID. Returns Team object.
 
 ```json
 {
-  "body": {
-    "name": "name string"
-  },
   "teamId": "teamId string"
 }
 ```
@@ -431,9 +412,6 @@ UUpdate a Team Membership by ID. Returns TeamMembership object.
 
 ```json
 {
-  "body": {
-    "isModerator": "true"
-  },
   "membershipId": "membershipId string"
 }
 ```
@@ -503,10 +481,6 @@ Update a webhook by ID. Returns a Webhook object.
 
 ```json
 {
-  "body": {
-    "name": "name string",
-    "targetUrl": "targetUrl string"
-  },
   "webhookId": "webhookId string"
 }
 ```
@@ -734,3 +708,6 @@ Get File contents by ID. Returns binary of file.
 
 - `id` : **[string]** Role ID.
 - `name` : **[string]** Role Display Name.
+
+
+

@@ -611,7 +611,17 @@ paths:
         '200':
           $ref: '#/components/responses/Team'
       requestBody:
-        $ref: '#/components/requestBodies/createTeamBody'
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  description: Team name.
+                  type: string
+        required: true
   '/teams/{teamId}':
     get:
       operationId: getTeam
@@ -646,7 +656,17 @@ paths:
         '200':
           $ref: '#/components/responses/Team'
       requestBody:
-        $ref: '#/components/requestBodies/createTeamBody'
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  description: Team name.
+                  type: string
+        required: true
     delete:
       operationId: deleteTeam
       summary: Delete a Team.
@@ -1187,27 +1207,6 @@ components:
                   $ref: '#/components/schemas/Role'
     Contents:
       description: Successful response.
-  requestBodies:
-    createTeamBody:
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-              - name
-            properties:
-              name:
-                description: Team name.
-                type: string
-      required: true
-  securitySchemes:
-    Token:
-      type: apiKey
-      name: Authorization
-      in: header
-      description: >-
-        Swagger Authentication with Bearer Token requires Token to be entered as
-        'Bearer '.
   schemas:
     Person:
       type: object

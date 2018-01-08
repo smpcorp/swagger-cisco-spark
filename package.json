@@ -11,7 +11,7 @@
       "email": "jeff@levensailor.com"
     }
   ],
-  "version": "1.0",
+  "version": "2.0.0",
   "license": "MIT",
   "devDependencies": {
     "swagme": "https://github.com/cumberlandgroup/swagme/tarball/master"
